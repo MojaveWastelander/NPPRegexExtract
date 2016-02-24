@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="ANSI Debug|Win32">
+      <Configuration>ANSI Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ANSI Release|Win32">
+      <Configuration>ANSI Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Unicode Debug|Win32">
+      <Configuration>Unicode Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Unicode Realeas|Win32">
+      <Configuration>Unicode Realeas</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\external\npp\menuCmdID.h" />
+    <ClInclude Include="..\..\external\npp\Notepad_plus_msgs.h" />
+    <ClInclude Include="..\..\external\npp\NppMessager.h" />
+    <ClInclude Include="..\..\external\npp\NppPluginIface.h" />
+    <ClInclude Include="..\..\external\npp\NppPluginIface_msgs.h" />
+    <ClInclude Include="..\..\external\npp\PluginDefinition.h" />
+    <ClInclude Include="..\..\external\npp\PluginInterface.h" />
+    <ClInclude Include="..\..\external\npp\SciMessager.h" />
+    <ClInclude Include="..\..\external\npp\Scintilla.h" />
+    <ClInclude Include="..\..\src\RegexExtract\Base.h" />
+    <ClInclude Include="..\..\src\RegexExtract\DataExtractorMultipleFiles.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\DataExtractorNotepadMultiple.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\DataExtractorNotepadSingle.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\DataExtractorSingleFile.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\DataPath.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\DataString.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\FolderBrowserDialog.h" />
+    <ClInclude Include="..\..\src\RegexExtract\Helpers.h" />
+    <ClInclude Include="..\..\src\RegexExtract\IDataExtractor.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\IDataKind.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\IOutputDataProcessor.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\NppPlugin.h" />
+    <ClInclude Include="..\..\src\RegexExtract\Options.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\OutputDataProcessorMultipleFiles.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\OutputDataProcessorSingleFile.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\RegexSearch.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\SearchDialog.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\external\ezutf\hpslib.cpp" />
+    <ClCompile Include="..\..\external\ezutf\textfile.cpp" />
+    <ClCompile Include="..\..\external\npp\NppMessager.cpp" />
+    <ClCompile Include="..\..\external\npp\NppPluginIface.cpp" />
+    <ClCompile Include="..\..\external\npp\SciMessager.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\DataExtractorMultipleFiles.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\DataExtractorNotepadMultiple.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\DataExtractorNotepadSingle.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\DataExtractorSingleFile.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\DataPath.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\DataString.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\FolderBrowserDialog.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\IOutputDataProcessor.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\NppPlugin.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\Options.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\OutputDataProcessorMultipleFiles.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\OutputDataProcessorSingleFile.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\PluginDefinition.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\RegexSearch.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\SearchDialog.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\RegexExtract\Resources.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1590D7CD-7D3A-4AB7-A355-EE02F7FB987D}</ProjectGuid>
+    <RootNamespace>NppPluginTemplate</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>RegexExtract</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Realeas|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC70.props" />
+    <Import Project="no_ms_shit.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Realeas|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC70.props" />
+    <Import Project="no_ms_shit.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC70.props" />
+    <Import Project="no_ms_shit.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC70.props" />
+    <Import Project="no_ms_shit.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.23107.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'">
+    <OutDir>$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\nana\include;$(CPP_LIBs)\cppformat;$(CPP_LIBS)\Win32++\include;$(CPP_LIBS)\tinyxml2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(CPP_LIBS)\nana\lib;$(CPP_LIBS)\cppformat\lib;$(CPP_LIBS)\tinyxml2\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(CPP_LIBS)\nana\source;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'">
+    <OutDir>.\bin\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\nana\include;$(CPP_LIBs)\cppformat;$(CPP_LIBS)\Win32++\include;$(CPP_LIBS)\tinyxml2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(CPP_LIBS)\nana\lib;$(CPP_LIBS)\cppformat\lib;$(CPP_LIBS)\tinyxml2\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(CPP_LIBS)\nana\source;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Realeas|Win32'">
+    <OutDir>$(SolutionDir)..\..\test\npp\plugins\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\nana\include;$(CPP_LIBs)\cppformat;$(CPP_LIBS)\Win32++\include;$(CPP_LIBS)\tinyxml2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(CPP_LIBS)\nana\lib;$(CPP_LIBS)\cppformat\lib;$(CPP_LIBS)\tinyxml2\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(CPP_LIBS)\nana\source;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
+    <OutDir>$(SolutionDir)..\..\test\npp\plugins\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\nana\include;$(CPP_LIBs)\cppformat;$(CPP_LIBS)\Win32++\include;$(CPP_LIBS)\tinyxml2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(CPP_LIBS)\nana\lib;$(CPP_LIBS)\cppformat\lib;$(CPP_LIBS)\tinyxml2\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(CPP_LIBS)\nana\source;$(SourcePath)</SourcePath>
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\DockingFeature;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;NPPPLUGINTEMPLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)NppPluginTemplate_DebugA.dll</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)NppPluginTemplate.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)NppPluginTemplate.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\DockingFeature;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NPPPLUGINTEMPLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)NppPluginTemplateA.dll</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)NppPluginTemplate.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Realeas|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\DockingFeature;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NPPPLUGINTEMPLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ShowIncludes>false</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>cppformat_r.lib;comctl32.lib;shlwapi.lib;tinyxml2_r.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)NppPluginTemplate.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>start $(SolutionDir)..\..\test\npp\notepad++.exe</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\DockingFeature;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;NPPPLUGINTEMPLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ShowIncludes>false</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>comctl32.lib;cppformat_d.lib;tinyxml2_d.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)NppPluginTemplate.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)NppPluginTemplate.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>start $(SolutionDir)..\..\test\npp\notepad++.exe</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
