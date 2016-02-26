@@ -1,5 +1,5 @@
 #include "Options.hpp"
-#include <tinyxml2.h>
+//#include <tinyxml2.h>
 #include <utf8conv\utf8conv.h>
 #include <boost/regex.hpp>
 #include <boost/algorithm/string_regex.hpp>
@@ -10,7 +10,7 @@
 #include <iostream>
 #include <iomanip>
 
-namespace ti = tinyxml2;
+//namespace ti = tinyxml2;
 
 #ifdef __LOG_DLL
 #include <chrono>
@@ -72,7 +72,8 @@ bool Options::LoadOptions()
     try
     {
         wptree pt;
-        std::wifstream opt{get().Options::GetOptionsFilePath()};
+        std::wifstream opt{Options::GetOptionsFilePath()};
+        if (!opt.good()) return false;
         boost::property_tree::read_xml(opt, pt);
         auto get_list_values = [&pt](std::vector<std::wstring>& v, const wchar_t* path)
         {
@@ -85,30 +86,31 @@ bool Options::LoadOptions()
             }
         };   
         // Extract options
+        GetExtractMode() = pt.get(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", GetExtractMode());
+        GetExtractModeSingleFile() = pt.get(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", GetExtractModeSingleFile());
+        GetAddHeader() = pt.get(L"root.ExtractOptions.ExtractMode.AddHeader", GetAddHeader());
 
-        get().GetExtractMode() = pt.get(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", en_ExtractMode::ExtractInSingleFile);
-        get().GetExtractModeSingleFile() = pt.get(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", en_ExtractModeSingleFile::PrettyPrint);
-        get().GetAddHeader() = pt.get(L"root.ExtractOptions.ExtractMode.AddHeader", false);
+        GetSaveMode() = pt.get(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", GetSaveMode());
+        get_list_values(GetBasePath(), L"root.ExtractOptions.BasePaths");
 
-        get().GetSaveMode() = pt.get(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", en_SaveMode::ExtractToNotepad);
-        get_list_values(get().GetBasePath(), L"root.ExtractOptions.BasePaths");
+        GetTemplateName() = pt.get(L"root.ExtractOptions.SaveMode.TemplateName", GetTemplateName());
+        GetOpenFilesInNotepad() = pt.get(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", GetOpenFilesInNotepad());
 
-        get().GetTemplateName() = pt.get(L"root.ExtractOptions.SaveMode.TemplateName", std::wstring(L"Group_%d.txt"));
-        get().GetOpenFilesInNotepad() = pt.get(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", true);
+        GetExtractCaseConversion() = pt.get(L"root.ExtractOptions.ExtractCaseConversion", GetExtractCaseConversion());
+        GetSkipWholeMatch() = pt.get(L"root.ExtractOptions.SkipWholeRegexMatch", GetSkipWholeMatch());
 
-        get().GetExtractCaseConversion() = pt.get(L"root.ExtractOptions.ExtractCaseConversion", en_ExtractCaseConversion::NoConversion);
-        get().GetSkipWholeMatch() = pt.get(L"root.ExtractOptions.SkipWholeRegexMatch", false);
+        GetSortMode() = pt.get(L"root.SearchOptions.SortMode", GetSortMode());
+        GetFilterUnique() = pt.get(L"root.SearchOptions.FilterUnique", GetFilterUnique());
+        GetCaseInsensitive() = pt.get(L"root.SearchOptions.CaseInsensitive", GetCaseInsensitive());
 
-        get().GetSortMode() = pt.get(L"root.SearchOptions.SortMode", en_SortMode::NoSort);
-        get().GetFilterUnique() = pt.get(L"root.SearchOptions.FilterUnique", false);
-        get().GetCaseInsensitive() = pt.get(L"root.SearchOptions.CaseInsensitive", false);
+        GetSeparator() = pt.get(L"root.ExtractOptions.ExtractMode.SingleFileMode.Separator", GetSeparator());
 
-
-        get_list_values(get().GetFindHistory(), L"root.History.Find");
-        get_list_values(get().GetReplaceHistory(), L"root.History.Replace");
-        pt.get(L"root.DataLocation.<xmlattr>.mode", get().GetDataLocation());
-        get_list_values(get().GetMask(), L"root.DataLocation.Masks");
-        get_list_values(get().GetPath(), L"root.DataLocation.Path");
+        get_list_values(GetFindHistory(), L"root.History.Find");
+        get_list_values(GetReplaceHistory(), L"root.History.Replace");
+        GetDataLocation() = pt.get(L"root.DataLocation.<xmlattr>.mode", GetDataLocation());
+        get_list_values(GetMask(), L"root.DataLocation.Masks");
+        get_list_values(GetPath(), L"root.DataLocation.Paths");
+        GetInSelection() = pt.get(L"root.DataLocation.InSelection", GetInSelection());
 
     }
     catch (std::exception& e)
@@ -150,45 +152,50 @@ bool Options::SaveOptions()
     {
 	    wptree pt;
 	    // Extract options
-	    pt.put(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", get().GetExtractMode());
-	    pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", get().GetExtractModeSingleFile());
-	    pt.put(L"root.ExtractOptions.ExtractMode.AddHeader", get().GetAddHeader());
+	    pt.put(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", GetExtractMode());
+	    pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", GetExtractModeSingleFile());
+        pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.Separator", GetSeparator());
+	    pt.put(L"root.ExtractOptions.ExtractMode.AddHeader", GetAddHeader());
 	
-	    pt.put(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", get().GetSaveMode());
-	    for (auto& s : get().GetBasePath())
+	    pt.put(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", GetSaveMode());
+	    for (auto& s : GetBasePath())
 	    {
 	        pt.add(L"root.ExtractOptions.BasePaths.Path", s);
 	    }
-	    pt.put(L"root.ExtractOptions.SaveMode.TemplateName", get().GetTemplateName());
-	    pt.put(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", get().GetOpenFilesInNotepad());
+	    pt.put(L"root.ExtractOptions.SaveMode.TemplateName", GetTemplateName());
+	    pt.put(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", GetOpenFilesInNotepad());
 	
-	    pt.put(L"root.ExtractOptions.ExtractCaseConversion", get().GetExtractCaseConversion());
-	    pt.put(L"root.ExtractOptions.SkipWholeRegexMatch", get().GetSkipWholeMatch());
+	    pt.put(L"root.ExtractOptions.ExtractCaseConversion", GetExtractCaseConversion());
+	    pt.put(L"root.ExtractOptions.SkipWholeRegexMatch", GetSkipWholeMatch());
 	
-	    pt.put(L"root.SearchOptions.SortMode", get().GetSortMode());
-	    pt.put(L"root.SearchOptions.FilterUnique", get().GetFilterUnique());
-	    pt.put(L"root.SearchOptions.CaseInsensitive", get().GetCaseInsensitive());
+	    pt.put(L"root.SearchOptions.SortMode", GetSortMode());
+	    pt.put(L"root.SearchOptions.FilterUnique", GetFilterUnique());
+	    pt.put(L"root.SearchOptions.CaseInsensitive", GetCaseInsensitive());
 	
-	    for (auto& s : get().GetFindHistory())
+	    for (auto& s : GetFindHistory())
 	    {
 	        pt.add(L"root.History.Find.RegEx", s);
 	    }
-	    for (auto& s : get().GetReplaceHistory())
+	    for (auto& s : GetReplaceHistory())
 	    {
 	        pt.add(L"root.History.Replace.RegEx", s);
 	    }
 	
-	    pt.put(L"root.DataLocation.<xmlattr>.mode", get().GetDataLocation());
-	    for (auto& s : get().GetMask())
+	    pt.put(L"root.DataLocation.<xmlattr>.mode", GetDataLocation());
+	    for (auto& s : GetMask())
 	    {
 	        pt.add(L"root.DataLocation.Masks.Mask", s);
 	    }
-	    for (auto& s : get().GetPath())
+	    for (auto& s : GetPath())
 	    {
 	        pt.add(L"root.DataLocation.Paths.Path", s);
 	    }
-	    std::wofstream opt{get().Options::GetOptionsFilePath()};
-	    //boost::property_tree::write_xml(opt, pt, boost::property_tree::xml_parser::xml_writer_settings<wchar_t>{' ', 4});
+
+        pt.put(L"root.DataLocation.InSelection", GetInSelection());
+
+	    std::wofstream opt{Options::GetOptionsFilePath()};
+        if (!opt.good()) return false;
+	    boost::property_tree::write_xml(opt, pt, boost::property_tree::xml_parser::xml_writer_settings<boost::property_tree::wptree::key_type>(L' ', 4));
     }
     catch (std::exception& e)
     {
@@ -200,21 +207,14 @@ bool Options::SaveOptions()
 
 bool Options::Init( const std::wstring& wsOptionsFilePath, bool bCreateDefaultIfNotExist /*= true*/ )
 {
-    if (get().GetOptionsFilePath().empty())
-    {
-        get().GetOptionsFilePath() = wsOptionsFilePath;
-        bool bOptions = false;
-        if ((bOptions = LoadOptions()))
-        {
-            if (bCreateDefaultIfNotExist && !bOptions)
-            {
-                CreateDefault();
-                return SaveOptions();
-            }
-        }
-        return bOptions;
-    }
-    return true;
+   get().m_wsOptionsFilePath = wsOptionsFilePath;
+   bool bOptions = LoadOptions();
+   if (bCreateDefaultIfNotExist && !bOptions)
+   {
+       CreateDefault();
+       return SaveOptions();
+   }
+   return bOptions;
 }
 
 template<typename FindResultT>

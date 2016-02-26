@@ -22,7 +22,7 @@ namespace logging
 
 
 template <class S, class E>
-typename std::enable_if<std::is_enum<E>::value, S>::type& operator<<(S& stream, E f)
+typename std::enable_if<std::is_enum<E>::value, S&>::type operator<<(S& stream, E f)
 {
     return stream << static_cast<int>(f);
 }
@@ -47,8 +47,8 @@ public:
         ExtractInSingleFile,
         ExtractWithReplace
     };
-    static_assert(std::is_enum<en_ExtractMode>::value, "en_ExtractMode is not an enum!!!!!");
     /// Values that represent columns separation mode for single files.
+
     enum class en_ExtractModeSingleFile
     {
         WithSeparator,  ///< Use a user defined separator.
@@ -141,45 +141,47 @@ public:
     /// \return true if it succeeds, false if it fails.
 
     static bool Init(const std::wstring& wsOptionsFilePath, bool bCreateDefaultIfNotExist = true);
+    static const std::wstring& GetOptionsFilePath() { return get().m_wsOptionsFilePath; }
 
 private:
+    /// All functions below made private to prohibit multiple object creation.
+    Options() = default;
+    Options(const Options& ref) = delete;
+    Options& operator=(const Options& ref) = delete;
+
     // Options file path
     std::wstring m_wsOptionsFilePath;
-    std::wstring& GetOptionsFilePath() 
-    { 
-        return m_wsOptionsFilePath; 
-    }
     // Find combobox
-    std::vector<std::wstring> m_vFindHistory; 
+    std::vector<std::wstring> m_vFindHistory; //< Find combobox history items
 
     // Replace combobox
-    std::vector<std::wstring> m_vReplaceHistory;
+    std::vector<std::wstring> m_vReplaceHistory; //< Replace combobox history items
     // Extract options
     //  Extract mode
-    en_ExtractMode m_ExtractMode;
-    en_ExtractModeSingleFile m_ExtractModeSingleFile;
+    en_ExtractMode m_ExtractMode = en_ExtractMode::ExtractInSingleFile;
+    en_ExtractModeSingleFile m_ExtractModeSingleFile = en_ExtractModeSingleFile::PrettyPrint;
     std::wstring m_wsSeparator; 
-    bool m_bAddHeader; 
+    bool m_bAddHeader = false; 
     //  Save mode
-    en_SaveMode m_SaveMode; 
+    en_SaveMode m_SaveMode = en_SaveMode::ExtractToNotepad; 
     std::vector<std::wstring> m_vBasePath; 
     std::wstring  m_wsTemplateName;
-    bool m_bOpenFilesInNotepad;
+    bool m_bOpenFilesInNotepad = false;
     //  Extract case conversion
-    en_ExtractCaseConversion m_ExtractCaseConversion;  
+    en_ExtractCaseConversion m_ExtractCaseConversion = en_ExtractCaseConversion::NoConversion;  
     //--
-    bool m_bSkipWholeMatch; 
+    bool m_bSkipWholeMatch = false; 
     // Search options
     //  Sort options
-    en_SortMode m_SortMode; 
+    en_SortMode m_SortMode = en_SortMode::NoSort; 
     //--
-    bool m_bFilterUnique;  
-    bool m_bCaseInsensitive;
-    bool m_bDotMatchNewline;	
+    bool m_bFilterUnique = false;  
+    bool m_bCaseInsensitive = false;
+    bool m_bDotMatchNewline = false;	
     // Data location
-    en_DataLocation m_DataLocation; 
+    en_DataLocation m_DataLocation = en_DataLocation::CurrentFile; 
     //--
-    bool m_bInSelection;
+    bool m_bInSelection = false;
     // Mask combobox
     std::vector<std::wstring> m_vMask;  
     // Path combobox
@@ -187,11 +189,6 @@ private:
 
     /// Creates a default configuration in case of loading errors or no actual options present.
     static void CreateDefault();
-
-    /// All functions below made private to prohibit multiple object creation.
-    Options() {;}
-    Options(const Options& ref); 
-    Options& operator=(const Options& ref);
 };
 
 /// Class used to convert strings from edit boxes, XML files etc. to C++ equivalents.

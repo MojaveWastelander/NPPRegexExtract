@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <ExtractOptions>
+        <ExtractMode mode="2">
+            <SingleFileMode mode="0">
+                <Separator>2</Separator>
+            </SingleFileMode>
+            <AddHeader>true</AddHeader>
+        </ExtractMode>
+        <SaveMode mode="1">
+            <TemplateName>4</TemplateName>
+            <OpenFilesInNotepad>true</OpenFilesInNotepad>
+        </SaveMode>
+        <BasePaths>
+            <Path>3</Path>
+        </BasePaths>
+        <ExtractCaseConversion>2</ExtractCaseConversion>
+        <SkipWholeRegexMatch>true</SkipWholeRegexMatch>
+    </ExtractOptions>
+    <SearchOptions>
+        <SortMode>1</SortMode>
+        <FilterUnique>true</FilterUnique>
+        <CaseInsensitive>true</CaseInsensitive>
+    </SearchOptions>
+    <History>
+        <Find>
+            <RegEx>0</RegEx>
+        </Find>
+        <Replace>
+            <RegEx>1</RegEx>
+        </Replace>
+    </History>
+    <DataLocation mode="2">
+        <Masks>
+            <Mask>5</Mask>
+        </Masks>
+        <Paths>
+            <Path>6</Path>
+        </Paths>
+        <InSelection>true</InSelection>
+    </DataLocation>
+</root>
