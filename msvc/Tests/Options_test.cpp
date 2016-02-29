@@ -5,6 +5,8 @@
 #include <RegexExtract\Options.hpp>
 #include <string>
 #include <filesystem>
+#include <algorithm>
+#include <cppformat\format.h>
 
 namespace fs = std::experimental::filesystem;
 std::wstring g_options_file_path = L"./options.xml";
@@ -74,7 +76,7 @@ TEST_CASE("Initialization checks", "[initialization]")
 
 }
 
-TEST_CASE("Save\load checks", "[save_load]")
+TEST_CASE("Save\\load checks", "[save_load]")
 {
     SECTION("Check that settings are preserved from previous test case")
     {
@@ -180,5 +182,23 @@ TEST_CASE("Save\load checks", "[save_load]")
         // Save stored settings, values should stay the same
         Options::SaveOptions();
         saved_values_check();
+    }
+
+    SECTION("List type settings should save and load in the same order")
+    {
+        Options::GetFindHistory().clear();
+        
+        int i = 0;
+        std::generate_n(std::back_inserter(Options::GetFindHistory()), 16, 
+                        [&i]
+                        {
+                            return fmt::format(L"[A-Z]+_{}", i++);
+                        });
+        auto v = Options::GetFindHistory();
+        Options::SaveOptions();
+        
+        Options::GetFindHistory().clear();
+        Options::LoadOptions();
+        REQUIRE(Options::GetFindHistory() == v);
     }
 }

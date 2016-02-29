@@ -215,3 +215,6 @@ test/npp/*
 *.opendb
 *.bak
 *.coatidb
+*.tlog
+*.lastbuildstate
+*.idb

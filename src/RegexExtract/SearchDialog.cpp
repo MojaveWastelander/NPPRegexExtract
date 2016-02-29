@@ -63,6 +63,7 @@ BOOL SearchDialog::OnCommand(WPARAM wParam, LPARAM lParam)
         auto folderBrowserDialog1 = std::make_unique<FolderBrowserDialog>();
         folderBrowserDialog1->Flags |= BIF_RETURNONLYFSDIRS | BIF_EDITBOX | BIF_VALIDATE | BIF_NEWDIALOGSTYLE | BIF_UAHINT;
         folderBrowserDialog1->Title = L"Choose a folder or try to create new one";
+        folderBrowserDialog1->Owner = m_hWnd;
 
         if (folderBrowserDialog1->ShowDialog())
         {
@@ -189,7 +190,7 @@ BOOL SearchDialog::OnInitDialog()
     m_chkDotMatchNewLine.SetCheck(Options::GetDotMatchNewline());
     m_chkOpenFilesInNotepad.SetCheck(Options::GetOpenFilesInNotepad());
     m_chkSkipWholeMatch.SetCheck(Options::GetSkipWholeMatch());
-
+    
     m_cbxFind.Clear();
     for (auto& s : Options::GetFindHistory())
     {
@@ -238,6 +239,7 @@ BOOL SearchDialog::OnInitDialog()
     }
     m_cbxPath.SetCurSel(0);
     m_cbxFind.SetFont(fnt);
+    m_cbxReplace.SetFont(fnt);
 
 
     m_upDataProcessor = GetDataProcessor();
@@ -293,11 +295,11 @@ void SearchDialog::SaveSettings()
     Options::GetTemplateName().assign(m_editTemplateName.GetWindowText());
 
     
-    InsertFrontUniqueNonEmpty(Options::GetFindHistory(), std::wstring(m_cbxFind.GetWindowText()));
-    InsertFrontUniqueNonEmpty(Options::GetReplaceHistory(), std::wstring(m_cbxReplace.GetWindowText()));
-    InsertFrontUniqueNonEmpty(Options::GetBasePath(), std::wstring(m_cbxBasePath.GetWindowText()));
-    InsertFrontUniqueNonEmpty(Options::GetPath(), std::wstring(m_cbxPath.GetWindowText()));
-    InsertFrontUniqueNonEmpty(Options::GetMask(), std::wstring(m_cbxMask.GetWindowText()));
+    InsertFrontUniqueNonEmpty(Options::GetFindHistory(), m_cbxFind);
+    InsertFrontUniqueNonEmpty(Options::GetReplaceHistory(), m_cbxReplace);
+    InsertFrontUniqueNonEmpty(Options::GetBasePath(), m_cbxBasePath);
+    InsertFrontUniqueNonEmpty(Options::GetPath(), m_cbxPath);
+    InsertFrontUniqueNonEmpty(Options::GetMask(), m_cbxMask);
 
 
     if (IsChecked(m_rbtnCurrentFile)) Options::GetDataLocation() = Options::en_DataLocation::CurrentFile;
@@ -452,8 +454,8 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
                 std::wstring temp{std::wstring(m_cbxMask.GetWindowText())};
                 if (!temp.empty())
                 {
-                    boost::replace_all(temp, L"*", L".*");
                     boost::replace_all(temp, L".", L"\\.");
+                    boost::replace_all(temp, L"*", L".*");
                     boost::replace_all(temp, L"?", L".");
                 }
                 rxMask.assign(temp);
@@ -465,23 +467,16 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
                 break;
             }
         }
-
-        try
-        {
-            itPos++;
-        }
-        catch (std::exception& e)
-        {
-            itPos.no_push();
-            itPos++;
-        }
+        
+        std::unique_ptr<IDataKind> up{nullptr};
         while (itPos != itEnd)
         {
             if (boost::filesystem::is_regular_file(itPos->path()))
             {
+                auto fn = itPos->path().filename().wstring();
                 if (std::regex_match(itPos->path().filename().wstring(), rxMask))
                 {
-                    return std::unique_ptr<IDataKind>(new DataKindPath(itPos->path().wstring()));
+                    up = std::unique_ptr<IDataKind>(new DataKindPath(itPos->path().wstring()));
                 }
             }
             try
@@ -493,6 +488,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
                 itPos.no_push();
                 itPos++;
             }
+            if (up) return up;
         }
     } break;
     default: break;
@@ -502,13 +498,13 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
 
 std::unique_ptr<IOutputDataProcessor> SearchDialog::GetDataProcessor()
 {
-    if (IsChecked(m_rbtnExtractSingleFile) || IsChecked(m_rbtnExtractReplace))
+    if (IsChecked(m_rbtnAllFilesFromLocation) || IsChecked(m_rbtnAllOpenedFiles))
     {
-        return std::make_unique<OutputDataProcessorSingleFile>();
+        return std::make_unique<OutputDataProcessorMultipleFiles>();
     }
     else
     {
-        return std::make_unique<OutputDataProcessorMultipleFiles>();
+        return std::make_unique<OutputDataProcessorSingleFile>();
     }
 }
 
@@ -516,24 +512,24 @@ IDataExtractor* SearchDialog::GetDataExtractor()
 {
     if (IsChecked(m_rbtnExtractToNotepad))
     {
-        if (IsChecked(m_rbtnExtractSingleFile) || IsChecked(m_rbtnExtractReplace))
+        if (IsChecked(m_rbtnAllFilesFromLocation) || IsChecked(m_rbtnAllOpenedFiles))
         {
-            return new DataExtractorNotepadSingle(m_SciMessager, m_NPPMessager);
+            return new DataExtractorNotepadMultiple(m_SciMessager, m_NPPMessager);
         }
         else
         {
-            return new DataExtractorNotepadMultiple(m_SciMessager, m_NPPMessager);
+            return new DataExtractorNotepadSingle(m_SciMessager, m_NPPMessager);
         }
     }
     else
     {
-        if (IsChecked(m_rbtnExtractSingleFile) || IsChecked(m_rbtnExtractReplace))
+        if (IsChecked(m_rbtnAllFilesFromLocation) || IsChecked(m_rbtnAllOpenedFiles))
         {
-            return new DataExtractorSingleFile;
+            return new DataExtractorMultipleFiles(m_NPPMessager);
         }
         else
         {
-            return new DataExtractorMultipleFiles(m_NPPMessager);
+            return new DataExtractorSingleFile;
         }
     }
 }

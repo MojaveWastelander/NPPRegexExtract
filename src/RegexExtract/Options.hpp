@@ -149,6 +149,7 @@ private:
     Options(const Options& ref) = delete;
     Options& operator=(const Options& ref) = delete;
 
+    static const size_t m_LIST_ITEMS_MAX_COUNT = 16;
     // Options file path
     std::wstring m_wsOptionsFilePath;
     // Find combobox

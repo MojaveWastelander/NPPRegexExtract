@@ -148,21 +148,34 @@ void Options::CreateDefault()
 bool Options::SaveOptions()
 {
     using boost::property_tree::wptree;
+
+
+
     try
     {
 	    wptree pt;
-	    // Extract options
+        auto set_list_values = [&](const wchar_t* p_setting_path, const auto& container)
+        {
+            int i = 0;
+            for (auto& s : container)
+            {
+                if (++i <= Options::m_LIST_ITEMS_MAX_COUNT)
+                {
+                    pt.add(p_setting_path, s);
+                }
+            }
+        };	    
+        
+        // Extract options
 	    pt.put(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", GetExtractMode());
 	    pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", GetExtractModeSingleFile());
         pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.Separator", GetSeparator());
 	    pt.put(L"root.ExtractOptions.ExtractMode.AddHeader", GetAddHeader());
 	
 	    pt.put(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", GetSaveMode());
-	    for (auto& s : GetBasePath())
-	    {
-	        pt.add(L"root.ExtractOptions.BasePaths.Path", s);
-	    }
-	    pt.put(L"root.ExtractOptions.SaveMode.TemplateName", GetTemplateName());
+        set_list_values(L"root.ExtractOptions.BasePaths.Path", GetBasePath());
+
+        pt.put(L"root.ExtractOptions.SaveMode.TemplateName", GetTemplateName());
 	    pt.put(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", GetOpenFilesInNotepad());
 	
 	    pt.put(L"root.ExtractOptions.ExtractCaseConversion", GetExtractCaseConversion());
@@ -172,24 +185,12 @@ bool Options::SaveOptions()
 	    pt.put(L"root.SearchOptions.FilterUnique", GetFilterUnique());
 	    pt.put(L"root.SearchOptions.CaseInsensitive", GetCaseInsensitive());
 	
-	    for (auto& s : GetFindHistory())
-	    {
-	        pt.add(L"root.History.Find.RegEx", s);
-	    }
-	    for (auto& s : GetReplaceHistory())
-	    {
-	        pt.add(L"root.History.Replace.RegEx", s);
-	    }
+        set_list_values(L"root.History.Find.RegEx", GetFindHistory());
+        set_list_values(L"root.History.Replace.RegEx", GetReplaceHistory());
 	
 	    pt.put(L"root.DataLocation.<xmlattr>.mode", GetDataLocation());
-	    for (auto& s : GetMask())
-	    {
-	        pt.add(L"root.DataLocation.Masks.Mask", s);
-	    }
-	    for (auto& s : GetPath())
-	    {
-	        pt.add(L"root.DataLocation.Paths.Path", s);
-	    }
+        set_list_values(L"root.DataLocation.Masks.Mask", GetMask());
+        set_list_values(L"root.DataLocation.Paths.Path", GetPath());
 
         pt.put(L"root.DataLocation.InSelection", GetInSelection());
 

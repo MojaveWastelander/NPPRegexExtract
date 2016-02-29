@@ -31,8 +31,8 @@ public:
     const std::wstring& GetRawTextData() const { return m_wsRawTextData; }
     virtual ~IDataKind(void) {}
 protected:
-    std::wstring m_wsRef;
-    std::wstring m_wsRawTextData;
+    std::wstring m_wsRef; //< Reference to data location
+    std::wstring m_wsRawTextData; //< Text data in raw format
     bool m_bParsed;
     bool m_bMatched;
     /// Function implemented by child classes which gets data from location specified in m_wsRef.

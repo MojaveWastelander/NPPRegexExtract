@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 //#include <wincore.h>
 //#include <stdcontrols.h>
 #include <vector>
@@ -18,8 +18,9 @@ inline bool IsChecked(Win32xx::CButton& checkBox)
 
 const size_t COMBOBOX_MAX_ITEMS = 16;
 
-void InsertFrontUniqueNonEmpty(std::vector<std::wstring>& vLines, std::wstring&& val)
+void InsertFrontUniqueNonEmpty(std::vector<std::wstring>& vLines, const Win32xx::CComboBox& cbx)
 {
+    std::wstring val = cbx.GetWindowText();
     if (val.empty()) return;
     auto it = std::find(begin(vLines), end(vLines), val);
 
@@ -28,9 +29,15 @@ void InsertFrontUniqueNonEmpty(std::vector<std::wstring>& vLines, std::wstring&&
         if (it != end(vLines))
         {
             vLines.erase(it);
+            cbx.DeleteString(cbx.FindString(0, cbx.GetWindowText()));
         }
-        if (vLines.size() >= COMBOBOX_MAX_ITEMS) vLines.erase(vLines.end());
+        if (vLines.size() >= COMBOBOX_MAX_ITEMS)
+        {
+            vLines.erase(vLines.begin());
+            cbx.DeleteString(0);
+        }
         vLines.insert(begin(vLines), val);
+        cbx.InsertString(0, cbx.GetWindowText());
     }
 
 }

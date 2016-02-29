@@ -24,7 +24,22 @@
     </SearchOptions>
     <History>
         <Find>
-            <RegEx>0</RegEx>
+            <RegEx>[A-Z]+_0</RegEx>
+            <RegEx>[A-Z]+_1</RegEx>
+            <RegEx>[A-Z]+_2</RegEx>
+            <RegEx>[A-Z]+_3</RegEx>
+            <RegEx>[A-Z]+_4</RegEx>
+            <RegEx>[A-Z]+_5</RegEx>
+            <RegEx>[A-Z]+_6</RegEx>
+            <RegEx>[A-Z]+_7</RegEx>
+            <RegEx>[A-Z]+_8</RegEx>
+            <RegEx>[A-Z]+_9</RegEx>
+            <RegEx>[A-Z]+_10</RegEx>
+            <RegEx>[A-Z]+_11</RegEx>
+            <RegEx>[A-Z]+_12</RegEx>
+            <RegEx>[A-Z]+_13</RegEx>
+            <RegEx>[A-Z]+_14</RegEx>
+            <RegEx>[A-Z]+_15</RegEx>
         </Find>
         <Replace>
             <RegEx>1</RegEx>
