@@ -16,6 +16,9 @@
     <Filter Include="ExternalFiles">
       <UniqueIdentifier>{e3004743-0eb0-49c4-b9db-3077d1e821f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3rdparty">
+      <UniqueIdentifier>{52cc6627-ddaa-4e54-8bb6-0d93244dcc70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -37,6 +40,21 @@
     </ClCompile>
     <ClCompile Include="..\..\src\RegexExtract\Options.cpp">
       <Filter>ExternalFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="IDataKind_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\DataPath.cpp">
+      <Filter>ExternalFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\DataString.cpp">
+      <Filter>ExternalFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\ezutf\hpslib.cpp">
+      <Filter>3rdparty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\ezutf\textfile.cpp">
+      <Filter>3rdparty</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -334,11 +334,11 @@ void SearchDialog::OnSearch(bool bShowResults)
             m_RegexSearch.ParseData(upData.get(), m_upDataProcessor.get());
         }
 
-        auto sec = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - start);
+        auto sec = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
         if (bShowResults)
         {
             Win32xx::CString strStat;
-            strStat.Format(L"Found %d matches in %d seconds.", m_RegexSearch.GetMatchesCount(), sec.count());
+            strStat.Format(L"Found %d matches in %.3f seconds.", m_RegexSearch.GetMatchesCount(), sec.count() / 60.f);
             ::MessageBox(this->m_hWnd, strStat, L"RegexExtract", MB_ICONINFORMATION);
         }
     }

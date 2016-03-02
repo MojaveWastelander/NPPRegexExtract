@@ -7,6 +7,8 @@
 #include <filesystem>
 #include <algorithm>
 #include <cppformat\format.h>
+#include <iostream>
+#include <sstream>
 
 namespace fs = std::experimental::filesystem;
 std::wstring g_options_file_path = L"./options.xml";
@@ -15,6 +17,7 @@ TEST_CASE("Initialization checks", "[initialization]")
 {
     SECTION("Default values in class")
     {
+
         REQUIRE((bool)(Options::GetExtractMode() == Options::en_ExtractMode::ExtractInSingleFile));
         REQUIRE((bool)(Options::GetExtractModeSingleFile() == Options::en_ExtractModeSingleFile::PrettyPrint));
         REQUIRE((bool)(Options::GetSaveMode() == Options::en_SaveMode::ExtractToNotepad));

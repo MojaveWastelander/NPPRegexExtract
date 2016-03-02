@@ -18,11 +18,13 @@ void DataKindPath::GetText()
     while (reader.ReadLine(nullptr, &pLine) >= 0)
     {
         m_wsRawTextData += pLine;
-        m_wsRawTextData += L"\r\n";
+        m_wsRawTextData += L"\n";
+        free_block(pLine);
+        pLine = nullptr;
     }
     if (m_wsRawTextData.size() > 2)
     {
-        m_wsRawTextData.erase(m_wsRawTextData.end() - 2);
+        m_wsRawTextData.erase(m_wsRawTextData.size() - 1);
     }
     reader.Close();
 }

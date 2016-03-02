@@ -9,20 +9,10 @@
 #include <locale>
 #include <type_traits>
 #include <fstream>
-//#define __LOG_DLL
-/// Very simple logging feature
-#ifdef __LOG_DLL
-
-namespace logging
-{
-    std::wofstream& log();
-}
-#endif // __LOG_DLL
-
 
 
 template <class S, class E>
-typename std::enable_if<std::is_enum<E>::value, S&>::type operator<<(S& stream, E f)
+typename std::enable_if<std::is_enum<E>::value, S>::type& operator<<(S& stream, E f)
 {
     return stream << static_cast<int>(f);
 }

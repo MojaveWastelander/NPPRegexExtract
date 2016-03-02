@@ -158,7 +158,12 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\external\ezutf\hpslib.cpp" />
+    <ClCompile Include="..\..\external\ezutf\textfile.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\DataPath.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\DataString.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\Options.cpp" />
+    <ClCompile Include="IDataKind_tests.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Options_test.cpp" />
   </ItemGroup>

@@ -7,6 +7,7 @@
 #define IDI_CUR_BUSY_SEARCH                     105
 #define IDI_CUR_BUSY_EXTRACT                    106
 #define IDI_FOLDER                              108
+#define IDD_ABOUT                               110
 #define IDC_CBX_MASK                            1002
 #define IDC_RBTN_CURRENT_FILE                   1004
 #define IDC_STATIC_1                            1016
@@ -44,3 +45,5 @@
 #define IDC_CHK_FROM_SELECTION                  1069
 #define IDC_CBX_PATH                            1070
 #define IDC_BTN_FOLDER                          40000
+#define ID_BUILD_DATE                           40001
+#define ID_COMPILER                             40002
