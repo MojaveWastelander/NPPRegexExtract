@@ -1,30 +1,26 @@
 #include "DataPath.hpp"
 #include <memory>
 #include <exception>
+#include <iostream>
 
 // Read file to a string using EZUTF (http://www.codeproject.com/Articles/22046/High-Performance-Unicode-Text-File-I-O-Routines-fo) TextFile class
-void DataKindPath::GetText()
+void DataKindPath::GetData()
 {
-    boost::filesystem::path p(m_wsRef);
-    if (boost::filesystem::exists(p) == false) return;
+    std::experimental::filesystem::path p(m_wsRef);
+    if (std::experimental::filesystem::exists(p) == false) return;
     std::wstring  wsData;
-    m_wsRawTextData.reserve(boost::filesystem::file_size(p));
+    m_wsRawTextData.reserve(static_cast<size_t>(std::experimental::filesystem::file_size(p)));
     TextFile reader;
     
     auto result = reader.Open(m_wsRef.c_str(), TF_READ, reader.GetEncoding());
     if (result != 0) throw std::exception{fmt::format("File read error in {0} for file '{1}", __func__, p.string()).c_str()};
 
-    wchar_t* pLine = nullptr;
-    while (reader.ReadLine(nullptr, &pLine) >= 0)
+    wchar_t c = 0;
+    // Switch to by char reading because ReadLine is not suitable 
+    // to get exact copy of original file
+    while ((c = reader.ReadChar()) != static_cast<wchar_t>(TF_EOF))
     {
-        m_wsRawTextData += pLine;
-        m_wsRawTextData += L"\n";
-        free_block(pLine);
-        pLine = nullptr;
-    }
-    if (m_wsRawTextData.size() > 2)
-    {
-        m_wsRawTextData.erase(m_wsRawTextData.size() - 1);
+        m_wsRawTextData.push_back(c);
     }
     reader.Close();
 }

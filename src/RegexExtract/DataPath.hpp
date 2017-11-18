@@ -13,9 +13,9 @@ public:
     DataKindPath(const std::wstring& wsPath):
         IDataKind(wsPath) 
     {
-        GetText();
+        GetData();
     }
 protected:
-    void GetText();
+    void GetData();
 };
 

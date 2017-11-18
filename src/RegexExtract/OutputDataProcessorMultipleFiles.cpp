@@ -10,7 +10,7 @@ std::vector<std::wstring> OutputDataProcessorMultipleFiles::GetProcessedData()
     {
         m_bProcessed = true;
         size_t i = 0;
-        if (Options::GetFilterUnique() == true)
+        if (Options::filter_unique() == true)
         {
             for (auto& usUniqueData : m_vUniqueData )
             {
@@ -20,9 +20,9 @@ std::vector<std::wstring> OutputDataProcessorMultipleFiles::GetProcessedData()
 
         for (size_t i = 0; i < m_vvMatchedData.size(); ++i)
         {
-            if (Options::GetSortMode() != Options::en_SortMode::NoSort)
+            if (Options::sort_mode() != Options::en_SortMode::NoSort)
             {
-                switch (Options::GetSortMode())
+                switch (Options::sort_mode())
                 {
                 case Options::en_SortMode::SortAscending:
                     {
@@ -54,26 +54,26 @@ void OutputDataProcessorMultipleFiles::AddData( const std::wsmatch& match )
 {
     if (!m_bInitialize)
     {
-        m_vvMatchedData.resize((Options::GetSkipWholeMatch() == false)?match.size():(match.size() - 1));
+        m_vvMatchedData.resize((Options::skip_whole_match() == false)?match.size():(match.size() - 1));
         m_vUniqueData.resize(m_vvMatchedData.size());
         m_bInitialize = true;
     }
     m_bProcessed = false;
     std::vector<std::wstring> vTemp;
     vTemp.reserve(m_vvMatchedData.size());
-    auto itMatch = (Options::GetSkipWholeMatch() == false)?match.begin():(match.begin() + 1);
+    auto itMatch = (Options::skip_whole_match() == false)?match.begin():(match.begin() + 1);
     for (itMatch; itMatch != match.end(); ++itMatch)
     {
         vTemp.push_back(std::move(itMatch->str()));
     }
     CalculateMatchesSize(match);
 
-    if (Options::GetExtractCaseConversion() != Options::en_ExtractCaseConversion::NoConversion)
+    if (Options::extract_case_conversion() != Options::en_ExtractCaseConversion::NoConversion)
     {
         CaseConversion(vTemp);
     }
 
-    if (Options::GetFilterUnique() == true)
+    if (Options::filter_unique() == true)
     {
         auto itvvMatchedData = m_vUniqueData.begin();
         for (auto& s : vTemp)

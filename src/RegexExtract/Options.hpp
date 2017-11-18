@@ -92,26 +92,26 @@ public:
 
     /// All functions below return references to available options variables
 
-    static std::vector<std::wstring>& GetFindHistory() { return get().m_vFindHistory; }
-    static std::vector<std::wstring>& GetReplaceHistory() { return get().m_vReplaceHistory; }
-    static Options::en_ExtractMode& GetExtractMode() { return get().m_ExtractMode; }    
-    static Options::en_ExtractModeSingleFile& GetExtractModeSingleFile() { return get().m_ExtractModeSingleFile; }
-    static std::wstring& GetSeparator() { return get().m_wsSeparator; }
-    static bool& GetAddHeader() { return get().m_bAddHeader; }
-    static Options::en_SaveMode& GetSaveMode() { return get().m_SaveMode; }
-    static std::vector<std::wstring>& GetBasePath() { return get().m_vBasePath; }
-    static std::wstring& GetTemplateName() { return get().m_wsTemplateName; }
-    static bool& GetOpenFilesInNotepad() { return get().m_bOpenFilesInNotepad; }
-    static Options::en_ExtractCaseConversion& GetExtractCaseConversion() { return get().m_ExtractCaseConversion; }
-    static bool& GetSkipWholeMatch() { return get().m_bSkipWholeMatch; }
-    static Options::en_SortMode& GetSortMode() { return get().m_SortMode; }
-    static bool& GetFilterUnique() { return get().m_bFilterUnique; }
-    static bool& GetCaseInsensitive() { return get().m_bCaseInsensitive; }
-    static bool& GetDotMatchNewline() { return get().m_bDotMatchNewline; }
-    static bool& GetInSelection() { return get().m_bInSelection; }
-    static Options::en_DataLocation& GetDataLocation() { return get().m_DataLocation; }
-    static std::vector<std::wstring>& GetMask() { return get().m_vMask; }
-    static std::vector<std::wstring>& GetPath() { return get().m_vPath; }
+    static std::vector<std::wstring>& find_history() { return get().m_find_history; }
+    static std::vector<std::wstring>& replace_history() { return get().m_replace_history; }
+    static Options::en_ExtractMode& extract_mode() { return get().m_extract_mode; }    
+    static Options::en_ExtractModeSingleFile& extract_mode_single_file() { return get().m_extract_mode_single_file; }
+    static std::wstring& separator() { return get().m_separator; }
+    static bool& add_header() { return get().m_add_header; }
+    static Options::en_SaveMode& save_mode() { return get().m_save_mode; }
+    static std::vector<std::wstring>& base_path() { return get().m_base_path; }
+    static std::wstring& template_name() { return get().m_template; }
+    static bool& open_files_in_notepad() { return get().m_open_files_in_notepad; }
+    static Options::en_ExtractCaseConversion& extract_case_conversion() { return get().m_extract_case_conversion; }
+    static bool& skip_whole_match() { return get().m_skip_whole_match; }
+    static Options::en_SortMode& sort_mode() { return get().m_sort_mode; }
+    static bool& filter_unique() { return get().m_filter_unique; }
+    static bool& case_insensitive() { return get().m_case_insensitive; }
+    static bool& dot_match_newline() { return get().m_dot_match_newline; }
+    static bool& in_selection() { return get().m_in_selection; }
+    static Options::en_DataLocation& data_location() { return get().m_data_location; }
+    static std::vector<std::wstring>& files_masks() { return get().m_files_masks; }
+    static std::vector<std::wstring>& files_paths() { return get().m_files_paths; }
 
     /// Loads options from XML file.
     ///
@@ -143,40 +143,40 @@ private:
     // Options file path
     std::wstring m_wsOptionsFilePath;
     // Find combobox
-    std::vector<std::wstring> m_vFindHistory; //< Find combobox history items
+    std::vector<std::wstring> m_find_history; //< Find combobox history items
 
     // Replace combobox
-    std::vector<std::wstring> m_vReplaceHistory; //< Replace combobox history items
+    std::vector<std::wstring> m_replace_history; //< Replace combobox history items
     // Extract options
     //  Extract mode
-    en_ExtractMode m_ExtractMode = en_ExtractMode::ExtractInSingleFile;
-    en_ExtractModeSingleFile m_ExtractModeSingleFile = en_ExtractModeSingleFile::PrettyPrint;
-    std::wstring m_wsSeparator; 
-    bool m_bAddHeader = false; 
+    en_ExtractMode m_extract_mode = en_ExtractMode::ExtractInSingleFile;
+    en_ExtractModeSingleFile m_extract_mode_single_file = en_ExtractModeSingleFile::PrettyPrint;
+    std::wstring m_separator; 
+    bool m_add_header = false; 
     //  Save mode
-    en_SaveMode m_SaveMode = en_SaveMode::ExtractToNotepad; 
-    std::vector<std::wstring> m_vBasePath; 
-    std::wstring  m_wsTemplateName;
-    bool m_bOpenFilesInNotepad = false;
+    en_SaveMode m_save_mode = en_SaveMode::ExtractToNotepad; 
+    std::vector<std::wstring> m_base_path; 
+    std::wstring  m_template;
+    bool m_open_files_in_notepad = false;
     //  Extract case conversion
-    en_ExtractCaseConversion m_ExtractCaseConversion = en_ExtractCaseConversion::NoConversion;  
+    en_ExtractCaseConversion m_extract_case_conversion = en_ExtractCaseConversion::NoConversion;  
     //--
-    bool m_bSkipWholeMatch = false; 
+    bool m_skip_whole_match = false; 
     // Search options
     //  Sort options
-    en_SortMode m_SortMode = en_SortMode::NoSort; 
+    en_SortMode m_sort_mode = en_SortMode::NoSort; 
     //--
-    bool m_bFilterUnique = false;  
-    bool m_bCaseInsensitive = false;
-    bool m_bDotMatchNewline = false;	
+    bool m_filter_unique = false;  
+    bool m_case_insensitive = false;
+    bool m_dot_match_newline = false;	
     // Data location
-    en_DataLocation m_DataLocation = en_DataLocation::CurrentFile; 
+    en_DataLocation m_data_location = en_DataLocation::CurrentFile; 
     //--
-    bool m_bInSelection = false;
+    bool m_in_selection = false;
     // Mask combobox
-    std::vector<std::wstring> m_vMask;  
+    std::vector<std::wstring> m_files_masks;  
     // Path combobox
-    std::vector<std::wstring> m_vPath;  
+    std::vector<std::wstring> m_files_paths;  
 
     /// Creates a default configuration in case of loading errors or no actual options present.
     static void CreateDefault();

@@ -25,7 +25,6 @@
 #include "resource.h"
 #include <wxx_wincore.h>
 #include "SearchDialog.hpp"
-#include <boost/filesystem.hpp>
 /*
  *  The v_getfuncarray namespace alias allows for emulation of a class's 'virtual' function by
  *  providing a 'symlink' like pointer to whichever npp_plugin namsespace extension that will
@@ -61,7 +60,7 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD reasonForCall, LPVOID /*lpReserved*/
             setPluginFuncItem(TEXT("Show main window"), npp_plugin::runMainDialog, 0, false, &g_extractShortcut);
            std::vector<wchar_t> vPath(MAX_PATH + 1);
            int iPathChars = ::GetModuleFileNameW((HMODULE)hModule, &vPath[0], MAX_PATH); 
-           boost::filesystem::path p{vPath.begin(), vPath.end()};
+           std::experimental::filesystem::path p{vPath.begin(), vPath.end()};
            p = p.parent_path();
            p += "\\";
            if (!Options::Init(p.wstring() + L"Config\\RegexExtractSettings.xml"))

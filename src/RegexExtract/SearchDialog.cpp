@@ -140,7 +140,7 @@ BOOL SearchDialog::OnInitDialog()
     AttachItem(IDC_BTN_FOLDER, m_btnFolder);
 
     // Get settings
-    switch (Options::GetExtractCaseConversion())
+    switch (Options::extract_case_conversion())
     {
     case Options::en_ExtractCaseConversion::NoConversion:   SetCheckBox(m_rbtnNoConversion); break;
     case Options::en_ExtractCaseConversion::AllUppercase:   SetCheckBox(m_rbtnAllUppercase); break;
@@ -150,7 +150,7 @@ BOOL SearchDialog::OnInitDialog()
     break;
     }
 
-    switch (Options::GetExtractMode())
+    switch (Options::extract_mode())
     {
     case Options::en_ExtractMode::ExtractInDifferentFile: SetCheckBox(m_rbtnExtractEachDiffFile); break;
     case Options::en_ExtractMode::ExtractInSingleFile: SetCheckBox(m_rbtnExtractSingleFile); break;
@@ -159,7 +159,7 @@ BOOL SearchDialog::OnInitDialog()
     break;
     }
 
-    switch (Options::GetExtractModeSingleFile())
+    switch (Options::extract_mode_single_file())
     {
     case Options::en_ExtractModeSingleFile::WithSeparator: SetCheckBox(m_rbtnWithSeparator); break;
     case Options::en_ExtractModeSingleFile::PrettyPrint: SetCheckBox(m_rbtnPrettyPrint); break;
@@ -167,7 +167,7 @@ BOOL SearchDialog::OnInitDialog()
     break;
     }
 
-    switch (Options::GetSortMode())
+    switch (Options::sort_mode())
     {
     case Options::en_SortMode::NoSort: SetCheckBox(m_rbtnNoSort); break;
     case Options::en_SortMode::SortAscending: SetCheckBox(m_rbtnSortAscending); break;
@@ -176,7 +176,7 @@ BOOL SearchDialog::OnInitDialog()
     break;
     }
 
-    switch (Options::GetSaveMode())
+    switch (Options::save_mode())
     {
     case Options::en_SaveMode::ExtractToNotepad: SetCheckBox(m_rbtnExtractToNotepad); break;
     case Options::en_SaveMode::SaveAsNewFile: SetCheckBox(m_rbtnSaveAsNewFiles); break;
@@ -184,38 +184,38 @@ BOOL SearchDialog::OnInitDialog()
     break;
     }
 
-    m_chkAddHeader.SetCheck(Options::GetAddHeader());
-    m_chkCaseInsensitive.SetCheck(Options::GetCaseInsensitive());
-    m_chkFilterUnique.SetCheck(Options::GetFilterUnique());
-    m_chkDotMatchNewLine.SetCheck(Options::GetDotMatchNewline());
-    m_chkOpenFilesInNotepad.SetCheck(Options::GetOpenFilesInNotepad());
-    m_chkSkipWholeMatch.SetCheck(Options::GetSkipWholeMatch());
+    m_chkAddHeader.SetCheck(Options::add_header());
+    m_chkCaseInsensitive.SetCheck(Options::case_insensitive());
+    m_chkFilterUnique.SetCheck(Options::filter_unique());
+    m_chkDotMatchNewLine.SetCheck(Options::dot_match_newline());
+    m_chkOpenFilesInNotepad.SetCheck(Options::open_files_in_notepad());
+    m_chkSkipWholeMatch.SetCheck(Options::skip_whole_match());
     
     m_cbxFind.Clear();
-    for (auto& s : Options::GetFindHistory())
+    for (auto& s : Options::find_history())
     {
         m_cbxFind.AddString(s.c_str());
     }
     m_cbxFind.SetCurSel(0);
 
     m_cbxReplace.Clear();
-    for (auto& s : Options::GetReplaceHistory())
+    for (auto& s : Options::replace_history())
     {
         m_cbxReplace.AddString(s.c_str());
     }
     m_cbxReplace.SetCurSel(0);
 
     m_cbxBasePath.Clear();
-    for (auto& s : Options::GetBasePath())
+    for (auto& s : Options::base_path())
     {
         m_cbxBasePath.AddString(s.c_str());
     }
     m_cbxBasePath.SetCurSel(0);
 
-    m_editSeparator.SetWindowText(Options::GetSeparator().c_str());
-    m_editTemplateName.SetWindowText(Options::GetTemplateName().c_str());
+    m_editSeparator.SetWindowText(Options::separator().c_str());
+    m_editTemplateName.SetWindowText(Options::template_name().c_str());
 
-    switch (Options::GetDataLocation())
+    switch (Options::data_location())
     {
     case Options::en_DataLocation::CurrentFile: SetCheckBox(m_rbtnCurrentFile); break;
     case Options::en_DataLocation::SpecificFiles: SetCheckBox(m_rbtnAllFilesFromLocation); break;
@@ -223,17 +223,17 @@ BOOL SearchDialog::OnInitDialog()
     default: SetCheckBox(m_rbtnCurrentFile);
     }
 
-    m_chkFromSelection.SetCheck((Options::GetInSelection() == true) ? BST_CHECKED : BST_UNCHECKED);
+    m_chkFromSelection.SetCheck((Options::in_selection() == true) ? BST_CHECKED : BST_UNCHECKED);
 
-    m_cbxMask.Clear();
-    for (auto& s : Options::GetMask())
+    m_cbxMask.Clear(); 
+    for (auto& s : Options::files_masks())
     {
         m_cbxMask.AddString(s.c_str());
     }
     m_cbxMask.SetCurSel(0);
 
     m_cbxPath.Clear();
-    for (auto& s : Options::GetPath())
+    for (auto& s : Options::files_paths())
     {
         m_cbxPath.AddString(s.c_str());
     }
@@ -245,7 +245,7 @@ BOOL SearchDialog::OnInitDialog()
     m_upDataProcessor = GetDataProcessor();
     m_upDataExtractor.reset(GetDataExtractor());
     m_SciMessager.setSciWnd(npp_plugin::hMainView());
-    NppData data = {npp_plugin::hNpp(), npp_plugin::hMainView(), npp_plugin::hSecondView()};
+    NppData data = {npp_plugin::hNpp(), npp_plugin::hMainView(), npp_plugin::hSecondView()}; 
     m_NPPMessager.setNppData(data);
     // Set the Icon
     SetIconLarge(IDI_DLL);
@@ -264,50 +264,50 @@ void SearchDialog::OnOK()
 
 void SearchDialog::SaveSettings()
 {
-    if (IsChecked(m_rbtnNoConversion)) Options::GetExtractCaseConversion() = Options::en_ExtractCaseConversion::NoConversion;
-    else if (IsChecked(m_rbtnAllUppercase)) Options::GetExtractCaseConversion() = Options::en_ExtractCaseConversion::AllUppercase;
-    else if (IsChecked(m_rbtnAllLowerCase)) Options::GetExtractCaseConversion() = Options::en_ExtractCaseConversion::AllLowercase;
-    else if (IsChecked(m_rbtnFirstUppercase)) Options::GetExtractCaseConversion() = Options::en_ExtractCaseConversion::FirstUppercase;
+    if (IsChecked(m_rbtnNoConversion)) Options::extract_case_conversion() = Options::en_ExtractCaseConversion::NoConversion;
+    else if (IsChecked(m_rbtnAllUppercase)) Options::extract_case_conversion() = Options::en_ExtractCaseConversion::AllUppercase;
+    else if (IsChecked(m_rbtnAllLowerCase)) Options::extract_case_conversion() = Options::en_ExtractCaseConversion::AllLowercase;
+    else if (IsChecked(m_rbtnFirstUppercase)) Options::extract_case_conversion() = Options::en_ExtractCaseConversion::FirstUppercase;
 
-    if (IsChecked(m_rbtnExtractEachDiffFile)) Options::GetExtractMode() = Options::en_ExtractMode::ExtractInDifferentFile;
-    else if (IsChecked(m_rbtnExtractSingleFile)) Options::GetExtractMode() = Options::en_ExtractMode::ExtractInSingleFile;
-    else if (IsChecked(m_rbtnExtractReplace)) Options::GetExtractMode() = Options::en_ExtractMode::ExtractWithReplace;
+    if (IsChecked(m_rbtnExtractEachDiffFile)) Options::extract_mode() = Options::en_ExtractMode::ExtractInDifferentFile;
+    else if (IsChecked(m_rbtnExtractSingleFile)) Options::extract_mode() = Options::en_ExtractMode::ExtractInSingleFile;
+    else if (IsChecked(m_rbtnExtractReplace)) Options::extract_mode() = Options::en_ExtractMode::ExtractWithReplace;
 
-    if (IsChecked(m_rbtnWithSeparator)) Options::GetExtractModeSingleFile() = Options::en_ExtractModeSingleFile::WithSeparator;
-    else if (IsChecked(m_rbtnPrettyPrint)) Options::GetExtractModeSingleFile() = Options::en_ExtractModeSingleFile::PrettyPrint;
+    if (IsChecked(m_rbtnWithSeparator)) Options::extract_mode_single_file() = Options::en_ExtractModeSingleFile::WithSeparator;
+    else if (IsChecked(m_rbtnPrettyPrint)) Options::extract_mode_single_file() = Options::en_ExtractModeSingleFile::PrettyPrint;
 
-    if (IsChecked(m_rbtnNoSort)) Options::GetSortMode() = Options::en_SortMode::NoSort;
-    else if (IsChecked(m_rbtnSortAscending)) Options::GetSortMode() = Options::en_SortMode::SortAscending;
-    else if (IsChecked(m_rbtnSortDescending)) Options::GetSortMode() = Options::en_SortMode::SortDescending;
+    if (IsChecked(m_rbtnNoSort)) Options::sort_mode() = Options::en_SortMode::NoSort;
+    else if (IsChecked(m_rbtnSortAscending)) Options::sort_mode() = Options::en_SortMode::SortAscending;
+    else if (IsChecked(m_rbtnSortDescending)) Options::sort_mode() = Options::en_SortMode::SortDescending;
 
-    if (IsChecked(m_rbtnExtractToNotepad)) Options::GetSaveMode() = Options::en_SaveMode::ExtractToNotepad;
-    else if (IsChecked(m_rbtnSaveAsNewFiles)) Options::GetSaveMode() = Options::en_SaveMode::SaveAsNewFile;
+    if (IsChecked(m_rbtnExtractToNotepad)) Options::save_mode() = Options::en_SaveMode::ExtractToNotepad;
+    else if (IsChecked(m_rbtnSaveAsNewFiles)) Options::save_mode() = Options::en_SaveMode::SaveAsNewFile;
 
-    Options::GetAddHeader() = IsChecked(m_chkAddHeader);
-    Options::GetCaseInsensitive() = IsChecked(m_chkCaseInsensitive);
-    Options::GetFilterUnique() = IsChecked(m_chkFilterUnique);
-    Options::GetDotMatchNewline() = IsChecked(m_chkDotMatchNewLine);
-    Options::GetOpenFilesInNotepad() = IsChecked(m_chkOpenFilesInNotepad);
-    Options::GetSkipWholeMatch() = IsChecked(m_chkSkipWholeMatch);
+    Options::add_header() = IsChecked(m_chkAddHeader);
+    Options::case_insensitive() = IsChecked(m_chkCaseInsensitive);
+    Options::filter_unique() = IsChecked(m_chkFilterUnique);
+    Options::dot_match_newline() = IsChecked(m_chkDotMatchNewLine);
+    Options::open_files_in_notepad() = IsChecked(m_chkOpenFilesInNotepad);
+    Options::skip_whole_match() = IsChecked(m_chkSkipWholeMatch);
 
-    Options::GetSeparator().assign(m_editSeparator.GetWindowText());
+    Options::separator().assign(m_editSeparator.GetWindowText());
 
-    Options::GetTemplateName().assign(m_editTemplateName.GetWindowText());
+    Options::template_name().assign(m_editTemplateName.GetWindowText());
 
     
-    InsertFrontUniqueNonEmpty(Options::GetFindHistory(), m_cbxFind);
-    InsertFrontUniqueNonEmpty(Options::GetReplaceHistory(), m_cbxReplace);
-    InsertFrontUniqueNonEmpty(Options::GetBasePath(), m_cbxBasePath);
-    InsertFrontUniqueNonEmpty(Options::GetPath(), m_cbxPath);
-    InsertFrontUniqueNonEmpty(Options::GetMask(), m_cbxMask);
+    InsertFrontUniqueNonEmpty(Options::find_history(), m_cbxFind);
+    InsertFrontUniqueNonEmpty(Options::replace_history(), m_cbxReplace);
+    InsertFrontUniqueNonEmpty(Options::base_path(), m_cbxBasePath);
+    InsertFrontUniqueNonEmpty(Options::files_paths(), m_cbxPath);
+    InsertFrontUniqueNonEmpty(Options::files_masks(), m_cbxMask);
 
 
-    if (IsChecked(m_rbtnCurrentFile)) Options::GetDataLocation() = Options::en_DataLocation::CurrentFile;
-    else if (IsChecked(m_rbtnAllFilesFromLocation)) Options::GetDataLocation() = Options::en_DataLocation::SpecificFiles;
-    else if (IsChecked(m_rbtnAllOpenedFiles)) Options::GetDataLocation() = Options::en_DataLocation::AllOpenedFiles;
-    else Options::GetDataLocation() = Options::en_DataLocation::CurrentFile;
+    if (IsChecked(m_rbtnCurrentFile)) Options::data_location() = Options::en_DataLocation::CurrentFile;
+    else if (IsChecked(m_rbtnAllFilesFromLocation)) Options::data_location() = Options::en_DataLocation::SpecificFiles;
+    else if (IsChecked(m_rbtnAllOpenedFiles)) Options::data_location() = Options::en_DataLocation::AllOpenedFiles;
+    else Options::data_location() = Options::en_DataLocation::CurrentFile;
 
-    Options::GetInSelection() = (IsChecked(m_chkFromSelection)) ? true : false;
+    Options::in_selection() = (IsChecked(m_chkFromSelection)) ? true : false;
 
     //TODO: Check if search was done already
     Options::get().SaveOptions();
@@ -334,12 +334,20 @@ void SearchDialog::OnSearch(bool bShowResults)
             m_RegexSearch.ParseData(upData.get(), m_upDataProcessor.get());
         }
 
-        auto sec = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
+        auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
+        auto minutes = std::chrono::duration_cast<std::chrono::minutes>(std::chrono::high_resolution_clock::now() - start);
         if (bShowResults)
         {
             Win32xx::CString strStat;
-            strStat.Format(L"Found %d matches in %.3f seconds.", m_RegexSearch.GetMatchesCount(), sec.count() / 60.f);
-            ::MessageBox(this->m_hWnd, strStat, L"RegexExtract", MB_ICONINFORMATION);
+            if (minutes.count())
+            {
+                strStat.Format(L"Found %d matches in %dm %.2fs.", m_RegexSearch.GetMatchesCount(), minutes.count(), (msec - minutes).count() / 1000.f);
+            }
+            else
+            {
+                strStat.Format(L"Found %d matches in %.2fs.", m_RegexSearch.GetMatchesCount(), msec.count() / 1000.f);
+            }
+			UpdateTitle(strStat);
         }
     }
     catch (std::exception& e)
@@ -357,7 +365,7 @@ void SearchDialog::OnSearch(bool bShowResults)
 std::unique_ptr<IDataKind> SearchDialog::NextData()
 {
    // LOG(INFO) << "data location: " << static_cast<int>(Options::GetDataLocation());
-    switch (Options::GetDataLocation())
+    switch (Options::data_location())
     {
     case Options::en_DataLocation::CurrentFile:
     {
@@ -365,7 +373,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
         if (bDone == false)
         {
             bDone = true;
-            if (!Options::GetInSelection())
+            if (!Options::in_selection())
             {
                 // Get all text from current document
                // LOG(INFO) << "Get all text from current document";
@@ -430,20 +438,20 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
     } break;
     case Options::en_DataLocation::SpecificFiles:
     {
-        static boost::filesystem::recursive_directory_iterator itPos;
-        static boost::filesystem::recursive_directory_iterator itEnd;
+        static std::experimental::filesystem::recursive_directory_iterator itPos;
+        static std::experimental::filesystem::recursive_directory_iterator itEnd;
         static std::wregex rxMask;
 
         if (itPos == itEnd)
         {
-            boost::filesystem::path pathToSearch(std::wstring(m_cbxPath.GetWindowText()));
+            std::experimental::filesystem::path pathToSearch(std::wstring(m_cbxPath.GetWindowText()));
             // If path does not exist or is not a directory search will not be executed
-            if (!boost::filesystem::exists(pathToSearch))
+            if (!std::experimental::filesystem::exists(pathToSearch))
             {
                 ::MessageBox(this->m_hWnd, L"Path does not exist", L"Data location path field", MB_ICONEXCLAMATION);
                 break;
             }
-            else if (!boost::filesystem::is_directory(pathToSearch))
+            else if (!std::experimental::filesystem::is_directory(pathToSearch))
             {
                 ::MessageBox(this->m_hWnd, L"Field provided is not a directory", L"Data location path field", MB_ICONEXCLAMATION);
                 break;
@@ -459,7 +467,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
                     boost::replace_all(temp, L"?", L".");
                 }
                 rxMask.assign(temp);
-                itPos = boost::filesystem::recursive_directory_iterator(pathToSearch);
+                itPos = std::experimental::filesystem::recursive_directory_iterator(pathToSearch);
             }
             catch (std::exception& e)
             {
@@ -471,7 +479,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
         std::unique_ptr<IDataKind> up{nullptr};
         while (itPos != itEnd)
         {
-            if (boost::filesystem::is_regular_file(itPos->path()))
+            if (std::experimental::filesystem::is_regular_file(itPos->path()))
             {
                 auto fn = itPos->path().filename().wstring();
                 if (std::regex_match(itPos->path().filename().wstring(), rxMask))
@@ -485,7 +493,6 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
             }
             catch (std::exception& e)
             {
-                itPos.no_push();
                 itPos++;
             }
             if (up) return up;
@@ -553,6 +560,17 @@ void SearchDialog::OnExtract()
     }
     ::SetCursor(m_curArrow);
     this->EndDialog(0);
+}
+
+void SearchDialog::UpdateTitle(CString& sText)
+{
+	CString title = L"RegexExtract";
+	if (!sText.IsEmpty())
+	{
+		title += L" - ";
+		title += sText.c_str();
+	}
+	this->SetWindowText(title);
 }
 
 void SearchDialog::GetComboboxTitle(Win32xx::CComboBox& cbx, std::vector<std::wstring> &vData)

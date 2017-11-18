@@ -1,6 +1,7 @@
-#include "main.h"
+﻿#include "main.h"
 #include <RegexExtract\IDataKind.hpp>
 #include <RegexExtract\DataPath.hpp>
+#include <RegexExtract\DataString.hpp>
 #include <catch.hpp>
 
 namespace fs = std::experimental::filesystem;
@@ -9,12 +10,12 @@ namespace fs = std::experimental::filesystem;
 class DataKind :
     public IDataKind
 {
-    void GetText() { m_wsRawTextData = L"123456"; }
+    void GetData() { m_wsRawTextData = L"123456"; }
 public:
     DataKind(const std::wstring& ws) :
         IDataKind{ws} 
     {
-        GetText();
+        GetData();
     }
 };
 
@@ -24,13 +25,24 @@ TEST_CASE("IDataKind basic tests", "[IDataKind]")
     auto def_val = L"xyz"s;
     std::unique_ptr<IDataKind> up = std::make_unique<DataKind>(def_val);
     REQUIRE(up->GetRef() == def_val);
-    REQUIRE(up->GetRawTextData() == L"123456"s);
+    REQUIRE(up->GetRawTextData() == L"123456"s);   
 
+    REQUIRE(!up->IsMatched());
+    up->SetMatched(true);
+    REQUIRE(up->IsMatched());
+
+    REQUIRE(!up->IsParsed());
+    up->SetParsed();
+    REQUIRE(up->IsParsed());
 }
 
 TEST_CASE("DataKindPath tests", "[DataKindPath]")
 {
     std::wstring test_val = LR"(//  Use
+, modification and distribution is subject to the Boost Software
+//  License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt
+//  Use
 , modification and distribution is subject to the Boost Software
 //  License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt
@@ -50,4 +62,28 @@ TEST_CASE("DataKindPath tests", "[DataKindPath]")
         DataKindPath dp{file_path};
         REQUIRE(dp.GetRawTextData() == test_val);
     }
+}
+
+TEST_CASE("DataKindString tests", "[DataKindString]")
+{
+    std::wstring test_val = LR"(//  Use
+, modification and distribution is subject to the Boost Software
+//  License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt
+//  Use
+, modification and distribution is subject to the Boost Software
+//  License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt
+)";
+
+    // Test copy construction
+    DataKindString ds{test_val};
+    REQUIRE(ds.GetRef().empty());
+    REQUIRE(ds.GetRawTextData() == test_val);
+
+    // Test move construction
+    DataKindString dsm{std::move(test_val)};
+    REQUIRE(dsm.GetRef().empty());
+    REQUIRE(test_val.empty());
+    REQUIRE(dsm.GetRawTextData() == ds.GetRawTextData());
 }

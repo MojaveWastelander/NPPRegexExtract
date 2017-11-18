@@ -9,8 +9,8 @@ OutputDataProcessorSingleFile::~OutputDataProcessorSingleFile(void)
 void OutputDataProcessorSingleFile::AddData( const std::wsmatch& match )
 {
     std::vector<std::wstring> vTemp;
-    vTemp.reserve((Options::GetSkipWholeMatch() == false)?match.size():(match.size() - 1));
-    auto itPos = (Options::GetSkipWholeMatch() == false)?match.begin():(match.begin() + 1);
+    vTemp.reserve((Options::skip_whole_match() == false)?match.size():(match.size() - 1));
+    auto itPos = (Options::skip_whole_match() == false)?match.begin():(match.begin() + 1);
 
     std::for_each(itPos, match.end(), 
         [&vTemp](const std::wsmatch::_Elem& m)
@@ -53,9 +53,9 @@ std::vector<std::wstring> OutputDataProcessorSingleFile::GetProcessedData()
         if (!m_bProcessed)
         {
             m_bProcessed = true;
-            if (Options::GetSortMode() != Options::en_SortMode::NoSort)
+            if (Options::sort_mode() != Options::en_SortMode::NoSort)
             {
-                switch (Options::GetSortMode())
+                switch (Options::sort_mode())
                 {
                 case Options::en_SortMode::SortAscending:
                     {
@@ -108,7 +108,7 @@ std::wstring OutputDataProcessorSingleFile::CombineStrings( const std::vector<st
 
 void OutputDataProcessorSingleFile::ProcessData( std::vector<std::wstring>&& vTemp )
 {
-    bool bInsertMatch = !Options::GetFilterUnique();
+    bool bInsertMatch = !Options::filter_unique();
 #ifdef __LOG_DLL
     logging::log() << L"New data size: " << vTemp.size();
     logging::log() << L"New data contents: ";
@@ -117,14 +117,14 @@ void OutputDataProcessorSingleFile::ProcessData( std::vector<std::wstring>&& vTe
         logging::log() << L"\t" << s;
     }
 #endif 
-    if (Options::GetExtractCaseConversion() != Options::en_ExtractCaseConversion::NoConversion)
+    if (Options::extract_case_conversion() != Options::en_ExtractCaseConversion::NoConversion)
     {
         CaseConversion(vTemp);
     }
 
-    if (Options::GetFilterUnique() == true)
+    if (Options::filter_unique() == true)
     {
-        if ((Options::GetExtractMode() == Options::en_ExtractMode::ExtractWithReplace) || (Options::GetSkipWholeMatch() == false))
+        if ((Options::extract_mode() == Options::en_ExtractMode::ExtractWithReplace) || (Options::skip_whole_match() == false))
         {
             bInsertMatch = m_usUniqueMatches.insert(vTemp[0]).second;
         }

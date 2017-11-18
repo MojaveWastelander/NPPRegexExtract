@@ -86,31 +86,31 @@ bool Options::LoadOptions()
             }
         };   
         // Extract options
-        GetExtractMode() = pt.get(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", GetExtractMode());
-        GetExtractModeSingleFile() = pt.get(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", GetExtractModeSingleFile());
-        GetAddHeader() = pt.get(L"root.ExtractOptions.ExtractMode.AddHeader", GetAddHeader());
+        extract_mode() = pt.get(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", extract_mode());
+        extract_mode_single_file() = pt.get(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", extract_mode_single_file());
+        add_header() = pt.get(L"root.ExtractOptions.ExtractMode.AddHeader", add_header());
 
-        GetSaveMode() = pt.get(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", GetSaveMode());
-        get_list_values(GetBasePath(), L"root.ExtractOptions.BasePaths");
+        save_mode() = pt.get(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", save_mode());
+        get_list_values(base_path(), L"root.ExtractOptions.BasePaths");
 
-        GetTemplateName() = pt.get(L"root.ExtractOptions.SaveMode.TemplateName", GetTemplateName());
-        GetOpenFilesInNotepad() = pt.get(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", GetOpenFilesInNotepad());
+        template_name() = pt.get(L"root.ExtractOptions.SaveMode.TemplateName", template_name());
+        open_files_in_notepad() = pt.get(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", open_files_in_notepad());
 
-        GetExtractCaseConversion() = pt.get(L"root.ExtractOptions.ExtractCaseConversion", GetExtractCaseConversion());
-        GetSkipWholeMatch() = pt.get(L"root.ExtractOptions.SkipWholeRegexMatch", GetSkipWholeMatch());
+        extract_case_conversion() = pt.get(L"root.ExtractOptions.ExtractCaseConversion", extract_case_conversion());
+        skip_whole_match() = pt.get(L"root.ExtractOptions.SkipWholeRegexMatch", skip_whole_match());
 
-        GetSortMode() = pt.get(L"root.SearchOptions.SortMode", GetSortMode());
-        GetFilterUnique() = pt.get(L"root.SearchOptions.FilterUnique", GetFilterUnique());
-        GetCaseInsensitive() = pt.get(L"root.SearchOptions.CaseInsensitive", GetCaseInsensitive());
+        sort_mode() = pt.get(L"root.SearchOptions.SortMode", sort_mode());
+        filter_unique() = pt.get(L"root.SearchOptions.FilterUnique", filter_unique());
+        case_insensitive() = pt.get(L"root.SearchOptions.CaseInsensitive", case_insensitive());
 
-        GetSeparator() = pt.get(L"root.ExtractOptions.ExtractMode.SingleFileMode.Separator", GetSeparator());
+        separator() = pt.get(L"root.ExtractOptions.ExtractMode.SingleFileMode.Separator", separator());
 
-        get_list_values(GetFindHistory(), L"root.History.Find");
-        get_list_values(GetReplaceHistory(), L"root.History.Replace");
-        GetDataLocation() = pt.get(L"root.DataLocation.<xmlattr>.mode", GetDataLocation());
-        get_list_values(GetMask(), L"root.DataLocation.Masks");
-        get_list_values(GetPath(), L"root.DataLocation.Paths");
-        GetInSelection() = pt.get(L"root.DataLocation.InSelection", GetInSelection());
+        get_list_values(find_history(), L"root.History.Find");
+        get_list_values(replace_history(), L"root.History.Replace");
+        data_location() = pt.get(L"root.DataLocation.<xmlattr>.mode", data_location());
+        get_list_values(files_masks(), L"root.DataLocation.Masks");
+        get_list_values(files_paths(), L"root.DataLocation.Paths");
+        in_selection() = pt.get(L"root.DataLocation.InSelection", in_selection());
 
     }
     catch (std::exception& e)
@@ -123,24 +123,24 @@ bool Options::LoadOptions()
 
 void Options::CreateDefault()
 {
-    GetFindHistory().clear();
-    GetReplaceHistory().clear();
-    GetExtractMode() = en_ExtractMode::ExtractInSingleFile;
-    GetSeparator() = std::wstring(L"\\t");
-    GetAddHeader() = false;
-    GetSaveMode() = en_SaveMode::ExtractToNotepad;
-    GetBasePath().clear();
-    GetTemplateName() = std::wstring(L"Group_%d.txt");
-    GetOpenFilesInNotepad() = false;
-    GetExtractCaseConversion() = en_ExtractCaseConversion::NoConversion;
-    GetSkipWholeMatch() = false;
-    GetSortMode() = en_SortMode::NoSort;
-    GetFilterUnique() = false;
-    GetCaseInsensitive() = false;
-    GetMask().clear();
-    GetPath().clear();
-    GetDataLocation() = en_DataLocation::CurrentFile;
-    GetInSelection() = false;
+    find_history().clear();
+    replace_history().clear();
+    extract_mode() = en_ExtractMode::ExtractInSingleFile;
+    separator() = std::wstring(L"\\t");
+    add_header() = false;
+    save_mode() = en_SaveMode::ExtractToNotepad;
+    base_path().clear();
+    template_name() = std::wstring(L"Group_%d.txt");
+    open_files_in_notepad() = false;
+    extract_case_conversion() = en_ExtractCaseConversion::NoConversion;
+    skip_whole_match() = false;
+    sort_mode() = en_SortMode::NoSort;
+    filter_unique() = false;
+    case_insensitive() = false;
+    files_masks().clear();
+    files_paths().clear();
+    data_location() = en_DataLocation::CurrentFile;
+    in_selection() = false;
     //TODO: Not present in current C++ regex
     //GetDotMatchNewline() = false;    
 }
@@ -167,32 +167,32 @@ bool Options::SaveOptions()
         };	    
         
         // Extract options
-	    pt.put(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", GetExtractMode());
-	    pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", GetExtractModeSingleFile());
-        pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.Separator", GetSeparator());
-	    pt.put(L"root.ExtractOptions.ExtractMode.AddHeader", GetAddHeader());
+	    pt.put(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", extract_mode());
+	    pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", extract_mode_single_file());
+        pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.Separator", separator());
+	    pt.put(L"root.ExtractOptions.ExtractMode.AddHeader", add_header());
 	
-	    pt.put(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", GetSaveMode());
-        set_list_values(L"root.ExtractOptions.BasePaths.Path", GetBasePath());
+	    pt.put(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", save_mode());
+        set_list_values(L"root.ExtractOptions.BasePaths.Path", base_path());
 
-        pt.put(L"root.ExtractOptions.SaveMode.TemplateName", GetTemplateName());
-	    pt.put(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", GetOpenFilesInNotepad());
+        pt.put(L"root.ExtractOptions.SaveMode.TemplateName", template_name());
+	    pt.put(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", open_files_in_notepad());
 	
-	    pt.put(L"root.ExtractOptions.ExtractCaseConversion", GetExtractCaseConversion());
-	    pt.put(L"root.ExtractOptions.SkipWholeRegexMatch", GetSkipWholeMatch());
+	    pt.put(L"root.ExtractOptions.ExtractCaseConversion", extract_case_conversion());
+	    pt.put(L"root.ExtractOptions.SkipWholeRegexMatch", skip_whole_match());
 	
-	    pt.put(L"root.SearchOptions.SortMode", GetSortMode());
-	    pt.put(L"root.SearchOptions.FilterUnique", GetFilterUnique());
-	    pt.put(L"root.SearchOptions.CaseInsensitive", GetCaseInsensitive());
+	    pt.put(L"root.SearchOptions.SortMode", sort_mode());
+	    pt.put(L"root.SearchOptions.FilterUnique", filter_unique());
+	    pt.put(L"root.SearchOptions.CaseInsensitive", case_insensitive());
 	
-        set_list_values(L"root.History.Find.RegEx", GetFindHistory());
-        set_list_values(L"root.History.Replace.RegEx", GetReplaceHistory());
+        set_list_values(L"root.History.Find.RegEx", find_history());
+        set_list_values(L"root.History.Replace.RegEx", replace_history());
 	
-	    pt.put(L"root.DataLocation.<xmlattr>.mode", GetDataLocation());
-        set_list_values(L"root.DataLocation.Masks.Mask", GetMask());
-        set_list_values(L"root.DataLocation.Paths.Path", GetPath());
+	    pt.put(L"root.DataLocation.<xmlattr>.mode", data_location());
+        set_list_values(L"root.DataLocation.Masks.Mask", files_masks());
+        set_list_values(L"root.DataLocation.Paths.Path", files_paths());
 
-        pt.put(L"root.DataLocation.InSelection", GetInSelection());
+        pt.put(L"root.DataLocation.InSelection", in_selection());
 
 	    std::wofstream opt{Options::GetOptionsFilePath()};
         if (!opt.good()) return false;

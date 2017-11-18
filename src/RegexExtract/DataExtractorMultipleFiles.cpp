@@ -10,8 +10,8 @@ DataExtractorMultipleFiles::~DataExtractorMultipleFiles(void)
 bool DataExtractorMultipleFiles::ExtractData( IOutputDataProcessor* pDataProcessor )
 {
     std::ofstream fileOut;
-    auto wsPath = Options::GetBasePath()[0];
-    std::wstring wsOutfileTemplate(Options::GetTemplateName());
+    auto wsPath = Options::base_path()[0];
+    std::wstring wsOutfileTemplate(Options::template_name());
     if (std::count(wsOutfileTemplate.begin(), wsOutfileTemplate.end(), '%') > 1) wsOutfileTemplate = L"Group_%d";
 
     if (wsPath.empty()) wsPath += L"ExtractedMatches.txt";
@@ -29,11 +29,11 @@ bool DataExtractorMultipleFiles::ExtractData( IOutputDataProcessor* pDataProcess
         auto sExtractedData = utf8util::UTF8FromUTF16(std::move(s));
         fileOut.write(sExtractedData.c_str(), sExtractedData.size());
         fileOut.close();
-        if (Options::GetOpenFilesInNotepad() == true)
+        if (Options::open_files_in_notepad() == true)
         {
-            m_npp.SendNppMsg(NPPM_DOOPEN, 0, (WPARAM)(wsPath.c_str()));
+            m_npp.SendNppMsg(NPPM_DOOPEN, 0, reinterpret_cast<WPARAM>(wsPath.c_str()));
             // Reload file in case is already opened
-            m_npp.SendNppMsg(NPPM_RELOADFILE, 0, (WPARAM) (wsPath.c_str()));
+            m_npp.SendNppMsg(NPPM_RELOADFILE, 0, reinterpret_cast<WPARAM> (wsPath.c_str()));
         }
     }
     return true;

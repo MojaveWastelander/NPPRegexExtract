@@ -6,10 +6,10 @@ class IDataKind
 {
 public:
     IDataKind(const std::wstring& wsRef):
-        m_wsRef(wsRef), m_bParsed(false), m_bMatched(false) {;}
+        m_wsRef{wsRef}, m_bParsed(false), m_bMatched(false) {; }
 
     IDataKind(std::wstring&& wsRef):
-        m_wsRef(wsRef), m_bParsed(false), m_bMatched(false) {;}
+        m_wsRef{std::move(wsRef)}, m_bParsed(false), m_bMatched(false) {; }
 
     void SetParsed() { m_bParsed = true; }
 
@@ -36,7 +36,7 @@ protected:
     bool m_bParsed;
     bool m_bMatched;
     /// Function implemented by child classes which gets data from location specified in m_wsRef.
-    virtual void GetText() = 0;
+    virtual void GetData() = 0;
 };
 
 

@@ -218,3 +218,5 @@ test/npp/*
 *.tlog
 *.lastbuildstate
 *.idb
+/msvc/RegexExtract/Unicode Debug/*
+/msvc/RegexExtract/Unicode Realeas/*

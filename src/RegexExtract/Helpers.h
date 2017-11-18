@@ -33,8 +33,8 @@ void InsertFrontUniqueNonEmpty(std::vector<std::wstring>& vLines, const Win32xx:
         }
         if (vLines.size() >= COMBOBOX_MAX_ITEMS)
         {
-            vLines.erase(vLines.begin());
-            cbx.DeleteString(0);
+            vLines.erase(vLines.end() - 1);
+            cbx.DeleteString(cbx.GetCount() - 1);
         }
         vLines.insert(begin(vLines), val);
         cbx.InsertString(0, cbx.GetWindowText());

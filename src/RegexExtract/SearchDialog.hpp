@@ -90,6 +90,7 @@ private:
     void GetComboboxTitle( Win32xx::CComboBox& cbx, std::vector<std::wstring> &vData );
     void OnSearch(bool bShowResults = true);
     void OnExtract();
+	void UpdateTitle(CString& sText);
 
     std::unique_ptr<IOutputDataProcessor> GetDataProcessor();
     IDataExtractor* GetDataExtractor();

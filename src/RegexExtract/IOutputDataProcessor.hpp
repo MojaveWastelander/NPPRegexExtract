@@ -11,7 +11,7 @@ public:
     virtual std::vector<std::wstring> GetProcessedData() = 0;
 
     virtual void AddData(const std::wsmatch& match) = 0;
-    virtual void AddData(std::wstring&& replaced_match) {replaced_match = replaced_match;}
+    virtual void AddData(std::wstring&& replaced_match) {replaced_match = std::move(replaced_match);}
     virtual void Reset() = 0;
     virtual bool IsEmpty() = 0;
     IOutputDataProcessor() :

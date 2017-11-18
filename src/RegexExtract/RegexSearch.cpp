@@ -14,7 +14,7 @@ bool RegexSearch::ParseData(IDataKind* pDataKind, IOutputDataProcessor* pDataPro
         }
         ++m_uMatchesCount;
         //LOG(INFO) << "New match:" << itPos->begin()->str();
-        if (Options::GetExtractMode() == Options::en_ExtractMode::ExtractWithReplace)
+        if (Options::extract_mode() == Options::en_ExtractMode::ExtractWithReplace)
         {
             auto& match = *itPos;
             pDataProcessor->AddData(std::regex_replace(match[0].str(), m_rxExpression, m_wsReplaceExpression));

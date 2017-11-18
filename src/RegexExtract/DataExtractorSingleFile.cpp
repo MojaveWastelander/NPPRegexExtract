@@ -4,7 +4,7 @@
 bool DataExtractorSingleFile::ExtractData(IOutputDataProcessor* pDataProcessor)
 {
     std::ofstream fileOut;
-    auto sPath = Options::GetBasePath()[0];
+    auto sPath = Options::base_path()[0];
     if (sPath.empty()) sPath = L"ExtractedMatches.txt";
     else if (sPath.back() != '\\') sPath += L"\\ExtractedMatches.txt";
     else sPath += L"ExtractedMatches.txt";

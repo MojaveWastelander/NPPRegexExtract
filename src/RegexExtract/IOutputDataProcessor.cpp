@@ -8,7 +8,7 @@ std::wstring IOutputDataProcessor::FormatLine(const std::vector<std::wstring>&vL
     try
     {
         wsTemp.reserve(GetLineMaxSize());
-        if (Options::GetExtractModeSingleFile() == Options::en_ExtractModeSingleFile::PrettyPrint)
+        if (Options::extract_mode_single_file() == Options::en_ExtractModeSingleFile::PrettyPrint)
         {
             auto itColumnMaxSize = m_vMatchesMaxSize.cbegin();
             for (auto& s : vLineData)
@@ -26,7 +26,7 @@ std::wstring IOutputDataProcessor::FormatLine(const std::vector<std::wstring>&vL
                 wsTemp += s;
                 if (--i) 
                 {
-                    wsTemp += UnescapeString(Options::GetSeparator());
+                    wsTemp += UnescapeString(Options::separator());
                 }
             }
         }
@@ -50,7 +50,7 @@ size_t IOutputDataProcessor::GetLineMaxSize()
     if (!m_bLineMaxSize)
     {
         m_bLineMaxSize = true;
-        if (Options::GetExtractMode() == Options::en_ExtractMode::ExtractWithReplace)
+        if (Options::extract_mode() == Options::en_ExtractMode::ExtractWithReplace)
         {
             m_uLineMaxSize = m_vMatchesMaxSize[0];
         }
@@ -70,10 +70,10 @@ void IOutputDataProcessor::CalculateMatchesSize( const std::wsmatch& match )
 {
     if (m_vMatchesMaxSize.empty())
     {
-        m_vMatchesMaxSize.resize((Options::GetSkipWholeMatch() == false)?match.size():(match.size() - 1), 0);
+        m_vMatchesMaxSize.resize((Options::skip_whole_match() == false)?match.size():(match.size() - 1), 0);
     }
     auto it = m_vMatchesMaxSize.begin();
-    bool bSkipFirst = Options::GetSkipWholeMatch();
+    bool bSkipFirst = Options::skip_whole_match();
     for (auto& m : match)
     {
         if (bSkipFirst == true)
@@ -101,7 +101,7 @@ void IOutputDataProcessor::CaseConversion( std::vector<std::wstring>&vLineData )
     {
         if (!s.empty())
         {
-            switch (Options::GetExtractCaseConversion())
+            switch (Options::extract_case_conversion())
             {
             case Options::en_ExtractCaseConversion::AllUppercase: boost::to_upper(s); break;
             case Options::en_ExtractCaseConversion::AllLowercase: boost::to_lower(s); break;
