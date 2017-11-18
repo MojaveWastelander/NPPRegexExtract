@@ -1,0 +1,41 @@
+[settings]
+    arch=x86
+    build_type=Release
+    compiler=Visual Studio
+    compiler.runtime=MT
+    compiler.version=14
+    os=Windows
+
+[requires]
+    Boost/1.Y.Z
+    catch/1.Y.Z
+    fmt/3.Y.Z
+    tinyxml2/3.Y.Z
+
+[options]
+
+
+[full_settings]
+    arch=x86
+    build_type=Release
+    compiler=Visual Studio
+    compiler.runtime=MT
+    compiler.version=14
+    os=Windows
+
+[full_requires]
+    Boost/1.61.0@eliaskousk/stable:253958a6ce15f1c9325eeea33ffc0a5cfc29212a
+    catch/1.5.0@TyRoXx/stable:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    fmt/3.0.0@memsharded/testing:79c71dbda360a634692376cd2ed5aafa18493952
+    tinyxml2/3.0.0@lasote/vcpkg:79c71dbda360a634692376cd2ed5aafa18493952
+    zlib/1.2.8@lasote/stable:79c71dbda360a634692376cd2ed5aafa18493952
+
+[full_options]
+    Boost:header_only=False
+    Boost:shared=False
+    fmt:header_only=False
+    fmt:shared=False
+    zlib:shared=False
+
+[scope]
+    dev=True

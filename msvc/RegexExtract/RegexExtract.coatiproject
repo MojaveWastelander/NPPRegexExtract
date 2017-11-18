@@ -299,7 +299,12 @@
             <source_path>E:/Code/projects/NPPRegexExtract/src/RegexExtract/RegexSearch.hpp</source_path>
             <source_path>E:/Code/projects/NPPRegexExtract/src/RegexExtract/SearchDialog.cpp</source_path>
             <source_path>E:/Code/projects/NPPRegexExtract/src/RegexExtract/SearchDialog.hpp</source_path>
+            <source_path>E:/Code/projects/NPPRegexExtract/external/ezutf/hpslib.cpp</source_path>
+            <source_path>E:/Code/projects/NPPRegexExtract/external/ezutf/textfile.cpp</source_path>
+            <source_path>E:/Code/projects/NPPRegexExtract/src/RegexExtract/DataPath.cpp</source_path>
+            <source_path>E:/Code/projects/NPPRegexExtract/src/RegexExtract/DataString.cpp</source_path>
             <source_path>E:/Code/projects/NPPRegexExtract/src/RegexExtract/Options.cpp</source_path>
+            <source_path>E:/Code/projects/NPPRegexExtract/msvc/Tests/IDataKind_tests.cpp</source_path>
             <source_path>E:/Code/projects/NPPRegexExtract/msvc/Tests/Options_test.cpp</source_path>
             <source_path>E:/Code/projects/NPPRegexExtract/msvc/Tests/main.h</source_path>
             <source_path>E:/Code/projects/NPPRegexExtract/msvc/Tests/stdafx.cpp</source_path>

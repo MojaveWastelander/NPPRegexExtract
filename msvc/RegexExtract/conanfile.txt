@@ -1,0 +1,8 @@
+[requires]
+tinyxml2/4.0.1@cinderblocks/stable
+catch/1.5.0@TyRoXx/stable
+Boost/1.64.0@eliaskousk/stable
+fmt/3.0.0@memsharded/testing
+
+[generators]
+visual_studio

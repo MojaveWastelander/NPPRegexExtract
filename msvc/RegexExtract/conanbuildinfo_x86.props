@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <ExecutablePath>C:/Users/Wastelander/.conan/data/Boost/1.61.0/eliaskousk/stable/package/253958a6ce15f1c9325eeea33ffc0a5cfc29212a/bin;C:/Users/Wastelander/.conan/data/catch/1.5.0/TyRoXx/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin;C:/Users/Wastelander/.conan/data/fmt/3.0.0/memsharded/testing/package/79c71dbda360a634692376cd2ed5aafa18493952/bin;C:/Users/Wastelander/.conan/data/tinyxml2/3.0.0/lasote/vcpkg/package/79c71dbda360a634692376cd2ed5aafa18493952/bin;C:/Users/Wastelander/.conan/data/zlib/1.2.8/lasote/stable/package/79c71dbda360a634692376cd2ed5aafa18493952/bin;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:/Users/Wastelander/.conan/data/Boost/1.61.0/eliaskousk/stable/package/253958a6ce15f1c9325eeea33ffc0a5cfc29212a/include;C:/Users/Wastelander/.conan/data/catch/1.5.0/TyRoXx/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include;C:/Users/Wastelander/.conan/data/fmt/3.0.0/memsharded/testing/package/79c71dbda360a634692376cd2ed5aafa18493952/include;C:/Users/Wastelander/.conan/data/tinyxml2/3.0.0/lasote/vcpkg/package/79c71dbda360a634692376cd2ed5aafa18493952/include;C:/Users/Wastelander/.conan/data/zlib/1.2.8/lasote/stable/package/79c71dbda360a634692376cd2ed5aafa18493952/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BOOST_USE_STATIC_LIBS;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:/Users/Wastelander/.conan/data/Boost/1.61.0/eliaskousk/stable/package/253958a6ce15f1c9325eeea33ffc0a5cfc29212a/lib;C:/Users/Wastelander/.conan/data/catch/1.5.0/TyRoXx/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib;C:/Users/Wastelander/.conan/data/fmt/3.0.0/memsharded/testing/package/79c71dbda360a634692376cd2ed5aafa18493952/lib;C:/Users/Wastelander/.conan/data/tinyxml2/3.0.0/lasote/vcpkg/package/79c71dbda360a634692376cd2ed5aafa18493952/lib;C:/Users/Wastelander/.conan/data/zlib/1.2.8/lasote/stable/package/79c71dbda360a634692376cd2ed5aafa18493952/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
