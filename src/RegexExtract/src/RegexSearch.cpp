@@ -1,4 +1,4 @@
-#include "RegexSearch.hpp"
+#include "../inc/RegexSearch.hpp"
 
 bool RegexSearch::ParseData(IDataKind* pDataKind, IOutputDataProcessor* pDataProcessor)
 {

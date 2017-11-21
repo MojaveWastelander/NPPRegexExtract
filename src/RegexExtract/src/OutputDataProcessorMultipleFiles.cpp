@@ -1,4 +1,4 @@
-#include "OutputDataProcessorMultipleFiles.hpp"
+#include "../inc/OutputDataProcessorMultipleFiles.hpp"
 
 std::vector<std::wstring> OutputDataProcessorMultipleFiles::GetProcessedData()
 {

@@ -38,23 +38,23 @@
     <ClCompile Include="Options_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\Options.cpp">
-      <Filter>ExternalFiles</Filter>
-    </ClCompile>
     <ClCompile Include="IDataKind_tests.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\DataPath.cpp">
-      <Filter>ExternalFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\DataString.cpp">
-      <Filter>ExternalFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\..\external\ezutf\hpslib.cpp">
       <Filter>3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="..\..\external\ezutf\textfile.cpp">
       <Filter>3rdparty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\DataPath.cpp">
+      <Filter>ExternalFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\DataString.cpp">
+      <Filter>ExternalFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\Options.cpp">
+      <Filter>ExternalFiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

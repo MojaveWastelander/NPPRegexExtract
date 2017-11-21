@@ -1,20 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="ANSI Debug|Win32">
-      <Configuration>ANSI Debug</Configuration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="ANSI Release|Win32">
-      <Configuration>ANSI Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Unicode Debug|Win32">
-      <Configuration>Unicode Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Unicode Realeas|Win32">
-      <Configuration>Unicode Realeas</Configuration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -28,24 +20,26 @@
     <ClInclude Include="..\..\external\npp\PluginInterface.h" />
     <ClInclude Include="..\..\external\npp\SciMessager.h" />
     <ClInclude Include="..\..\external\npp\Scintilla.h" />
-    <ClInclude Include="..\..\src\RegexExtract\Base.h" />
-    <ClInclude Include="..\..\src\RegexExtract\DataExtractorMultipleFiles.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\DataExtractorNotepadMultiple.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\DataExtractorNotepadSingle.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\DataExtractorSingleFile.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\DataPath.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\DataString.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\FolderBrowserDialog.h" />
-    <ClInclude Include="..\..\src\RegexExtract\Helpers.h" />
-    <ClInclude Include="..\..\src\RegexExtract\IDataExtractor.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\IDataKind.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\IOutputDataProcessor.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\NppPlugin.h" />
-    <ClInclude Include="..\..\src\RegexExtract\Options.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\OutputDataProcessorMultipleFiles.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\OutputDataProcessorSingleFile.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\RegexSearch.hpp" />
-    <ClInclude Include="..\..\src\RegexExtract\SearchDialog.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\Base.h" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataExtractorMultipleFiles.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataExtractorNotepadMultiple.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataExtractorNotepadSingle.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataExtractorSingleFile.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataPath.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataString.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\Encoding.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\FolderBrowserDialog.h" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\Helpers.h" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\IDataExtractor.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\IDataKind.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\IOutputDataProcessor.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\NppPlugin.h" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\Options.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\OutputDataProcessorMultipleFiles.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\OutputDataProcessorSingleFile.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\RegexSearch.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\SearchDialog.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\resources\resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\external\ezutf\hpslib.cpp" />
@@ -53,27 +47,36 @@
     <ClCompile Include="..\..\external\npp\NppMessager.cpp" />
     <ClCompile Include="..\..\external\npp\NppPluginIface.cpp" />
     <ClCompile Include="..\..\external\npp\SciMessager.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\DataExtractorMultipleFiles.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\DataExtractorNotepadMultiple.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\DataExtractorNotepadSingle.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\DataExtractorSingleFile.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\DataPath.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\DataString.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\FolderBrowserDialog.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\IOutputDataProcessor.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\NppPlugin.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\Options.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\OutputDataProcessorMultipleFiles.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\OutputDataProcessorSingleFile.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\PluginDefinition.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\RegexSearch.cpp" />
-    <ClCompile Include="..\..\src\RegexExtract\SearchDialog.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\DataExtractorMultipleFiles.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\DataExtractorNotepadMultiple.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\DataExtractorNotepadSingle.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\DataExtractorSingleFile.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\DataPath.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\DataString.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\Encoding.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\FolderBrowserDialog.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\IOutputDataProcessor.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\NppPlugin.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\Options.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\OutputDataProcessorMultipleFiles.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\OutputDataProcessorSingleFile.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\PluginDefinition.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\RegexSearch.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\SearchDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\src\RegexExtract\Resources.rc" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="..\..\src\RegexExtract\resources\Busy Extract.ani" />
+    <None Include="..\..\src\RegexExtract\resources\Busy Search.ani" />
+    <None Include="..\..\src\RegexExtract\resources\Busy.ani" />
+    <None Include="..\..\src\RegexExtract\resources\scissors.ani" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\src\RegexExtract\resources\dll.ico" />
+    <Image Include="..\..\src\RegexExtract\resources\Open Folder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\RegexExtract\resources\Resources.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1590D7CD-7D3A-4AB7-A355-EE02F7FB987D}</ProjectGuid>
@@ -83,22 +86,12 @@
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Realeas|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -106,111 +99,44 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC70.props" />
     <Import Project="no_ms_shit.props" />
+    <Import Project="..\common\vcpkg_static_x64.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Realeas|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC70.props" />
     <Import Project="no_ms_shit.props" />
     <Import Project="conanbuildinfo_x86.props" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC70.props" />
-    <Import Project="no_ms_shit.props" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC70.props" />
-    <Import Project="no_ms_shit.props" />
+    <Import Project="..\common\vcpkg_static_x64.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>14.0.23107.0</_ProjectFileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'">
-    <OutDir>$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\nana\include;$(CPP_LIBs)\cppformat;$(CPP_LIBS)\Win32++\include;$(CPP_LIBS)\tinyxml2\include;$(CPP_LIBS)\boost_1_62_0;$(IncludePath)</IncludePath>
-    <LibraryPath>$(CPP_LIBS)\nana\lib;$(CPP_LIBS)\cppformat\lib;$(CPP_LIBS)\tinyxml2\lib;$(CPP_LIBS)\boost_1_62_0\stage\lib</LibraryPath>
-    <SourcePath>$(CPP_LIBS)\nana\source;$(SourcePath) </SourcePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'">
-    <OutDir>.\bin\</OutDir>
-    <IntDir>Release\</IntDir>
-    <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\nana\include;$(CPP_LIBs)\cppformat;$(CPP_LIBS)\Win32++\include;$(CPP_LIBS)\tinyxml2\include;$(CPP_LIBS)\boost_1_62_0;$(IncludePath)</IncludePath>
-    <LibraryPath>$(CPP_LIBS)\nana\lib;$(CPP_LIBS)\cppformat\lib;$(CPP_LIBS)\tinyxml2\lib;$(CPP_LIBS)\boost_1_62_0\stage\lib</LibraryPath>
-    <SourcePath>$(CPP_LIBS)\nana\source;$(SourcePath) </SourcePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Realeas|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\..\test\npp\plugins\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\nana\include;$(CPP_LIBs)\cppformat;$(CPP_LIBS)\Win32++\include;$(CPP_LIBS)\tinyxml2\include;$(CPP_LIBS)\boost_1_62_0;$(WindowsSDK_LibraryPath_x86);$(IncludePath)</IncludePath>
-    <LibraryPath>$(CPP_LIBS)\nana\lib;$(CPP_LIBS)\cppformat\lib;$(CPP_LIBS)\tinyxml2\lib;$(CPP_LIBS)\boost_1_62_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\Win32++\include;$(WindowsSDK_LibraryPath_x86);$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <SourcePath>$(CPP_LIBS)\nana\source;$(SourcePath) </SourcePath>
     <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableExperimentalCppCoreCheck>false</EnableExperimentalCppCoreCheck>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\..\test\npp\plugins\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\nana\include;$(CPP_LIBs)\cppformat;$(CPP_LIBS)\Win32++\include;$(CPP_LIBS)\tinyxml2\include;$(CPP_LIBS)\boost_1_62_0;$(IncludePath)</IncludePath>
-    <LibraryPath>$(CPP_LIBS)\nana\lib;$(CPP_LIBS)\cppformat\lib;$(CPP_LIBS)\tinyxml2\lib;$(CPP_LIBS)\boost_1_62_0\stage\lib</LibraryPath>
+    <IncludePath>$(SolutionDir)..\..\external;$(CPP_LIBS)\Win32++\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <SourcePath>$(CPP_LIBS)\nana\source;$(SourcePath) </SourcePath>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\DockingFeature;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;NPPPLUGINTEMPLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeader />
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>user32.lib;Advapi32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)NppPluginTemplate_DebugA.dll</OutputFile>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)NppPluginTemplate.pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
-      <ImportLibrary>$(OutDir)NppPluginTemplate.lib</ImportLibrary>
-      <TargetMachine>MachineX86</TargetMachine>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>.\DockingFeature;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NPPPLUGINTEMPLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader />
-      <PrecompiledHeaderFile />
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>user32.lib;Advapi32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)NppPluginTemplateA.dll</OutputFile>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <ImportLibrary>$(OutDir)NppPluginTemplate.lib</ImportLibrary>
-      <TargetMachine>MachineX86</TargetMachine>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Realeas|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(CPP_LIBS)\Win32++\include;.\DockingFeature;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NPPPLUGINTEMPLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -238,7 +164,7 @@
       <Command>start $(SolutionDir)..\..\test\npp\notepad++.exe</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>.\DockingFeature;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

@@ -1,7 +1,7 @@
 ﻿#include "main.h"
-#include <RegexExtract\IDataKind.hpp>
-#include <RegexExtract\DataPath.hpp>
-#include <RegexExtract\DataString.hpp>
+#include <IDataKind.hpp>
+#include <DataPath.hpp>
+#include <DataString.hpp>
 #include <catch.hpp>
 
 namespace fs = std::experimental::filesystem;

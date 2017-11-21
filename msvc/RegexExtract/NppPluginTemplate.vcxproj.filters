@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
-    </Filter>
     <Filter Include="Notepad++">
       <UniqueIdentifier>{c835438d-650a-4bd0-994b-578e7eee8657}</UniqueIdentifier>
     </Filter>
@@ -18,69 +14,19 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="RegexExtract">
-      <UniqueIdentifier>{dd60e6f3-759d-44e2-83ae-372bdfa1df92}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ezutf">
       <UniqueIdentifier>{19a5f680-fe00-44f5-b1a8-562ed0466a23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="inc">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\RegexExtract\Base.h">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\DataExtractorMultipleFiles.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\DataExtractorNotepadMultiple.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\DataExtractorNotepadSingle.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\DataExtractorSingleFile.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\DataPath.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\DataString.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\FolderBrowserDialog.h">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\Helpers.h">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\IDataExtractor.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\IDataKind.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\IOutputDataProcessor.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\Options.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\OutputDataProcessorMultipleFiles.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\OutputDataProcessorSingleFile.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\RegexSearch.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\SearchDialog.hpp">
-      <Filter>RegexExtract</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\external\npp\menuCmdID.h">
       <Filter>Notepad++\include</Filter>
     </ClInclude>
@@ -108,53 +54,68 @@
     <ClInclude Include="..\..\external\npp\Scintilla.h">
       <Filter>Notepad++\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\RegexExtract\NppPlugin.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\..\src\RegexExtract\inc\Base.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataExtractorMultipleFiles.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataExtractorNotepadMultiple.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataExtractorNotepadSingle.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataExtractorSingleFile.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataPath.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\DataString.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\Encoding.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\FolderBrowserDialog.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\Helpers.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\IDataExtractor.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\IDataKind.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\IOutputDataProcessor.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\NppPlugin.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\Options.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\OutputDataProcessorMultipleFiles.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\OutputDataProcessorSingleFile.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\RegexSearch.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\SearchDialog.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\resources\resource.h">
+      <Filter>resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\RegexExtract\DataExtractorMultipleFiles.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\DataExtractorNotepadMultiple.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\DataExtractorNotepadSingle.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\DataExtractorSingleFile.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\DataPath.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\DataString.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\FolderBrowserDialog.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\IOutputDataProcessor.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\Options.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\OutputDataProcessorMultipleFiles.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\OutputDataProcessorSingleFile.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\RegexSearch.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\SearchDialog.cpp">
-      <Filter>RegexExtract</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\PluginDefinition.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\external\npp\NppMessager.cpp">
       <Filter>Notepad++\src</Filter>
     </ClCompile>
@@ -164,22 +125,87 @@
     <ClCompile Include="..\..\external\npp\SciMessager.cpp">
       <Filter>Notepad++\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\RegexExtract\NppPlugin.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\external\ezutf\hpslib.cpp">
       <Filter>ezutf</Filter>
     </ClCompile>
     <ClCompile Include="..\..\external\ezutf\textfile.cpp">
       <Filter>ezutf</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\..\src\RegexExtract\Resources.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\DataExtractorMultipleFiles.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\DataExtractorNotepadMultiple.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\DataExtractorNotepadSingle.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\DataExtractorSingleFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\DataPath.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\DataString.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\Encoding.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\FolderBrowserDialog.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\IOutputDataProcessor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\NppPlugin.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\Options.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\OutputDataProcessorMultipleFiles.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\OutputDataProcessorSingleFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\PluginDefinition.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\RegexSearch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\SearchDialog.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\..\src\RegexExtract\resources\Busy Extract.ani">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="..\..\src\RegexExtract\resources\Busy Search.ani">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="..\..\src\RegexExtract\resources\Busy.ani">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="..\..\src\RegexExtract\resources\scissors.ani">
+      <Filter>resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\src\RegexExtract\resources\dll.ico">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="..\..\src\RegexExtract\resources\Open Folder.ico">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\RegexExtract\resources\Resources.rc">
+      <Filter>resources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

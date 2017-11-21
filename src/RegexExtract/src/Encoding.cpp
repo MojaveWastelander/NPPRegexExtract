@@ -1,4 +1,4 @@
-#include "Encoding.hpp"
+#include "../inc/Encoding.hpp"
 
 std::string to_utf8(const wchar_t* buffer, int len)
 {

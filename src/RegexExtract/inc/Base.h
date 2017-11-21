@@ -20,7 +20,7 @@
 #include <boost\algorithm\string\case_conv.hpp>
 #include <boost\format.hpp>
 
-#include <cppformat\format.h>
+#include <fmt\format.h>
 
 //#include "stxutif.h"
 #include <utf8conv\utf8conv.h>

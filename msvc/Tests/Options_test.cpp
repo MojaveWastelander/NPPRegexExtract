@@ -2,42 +2,42 @@
 //
 
 #include <catch.hpp>
-#include <RegexExtract\Options.hpp>
+#include <Options.hpp>
 #include <string>
 #include <filesystem>
 #include <algorithm>
-#include <cppformat\format.h>
+#include <fmt\format.h>
 #include <iostream>
 #include <sstream>
 
 namespace fs = std::experimental::filesystem;
-std::wstring g_options_file_path = L"./options.xml";
+std::wstring g_options_file_path = L"./config/options.xml";
 
 TEST_CASE("Initialization checks", "[initialization]") 
 {
     SECTION("Default values in class")
     {
 
-        REQUIRE((bool)(Options::GetExtractMode() == Options::en_ExtractMode::ExtractInSingleFile));
-        REQUIRE((bool)(Options::GetExtractModeSingleFile() == Options::en_ExtractModeSingleFile::PrettyPrint));
-        REQUIRE((bool)(Options::GetSaveMode() == Options::en_SaveMode::ExtractToNotepad));
-        REQUIRE((bool)(Options::GetExtractCaseConversion() == Options::en_ExtractCaseConversion::NoConversion));
-        REQUIRE((bool)(Options::GetSortMode() == Options::en_SortMode::NoSort));
-        REQUIRE((bool)(Options::GetDataLocation() == Options::en_DataLocation::CurrentFile));
-        REQUIRE(Options::GetFindHistory().empty());
-        REQUIRE(Options::GetReplaceHistory().empty());
-        REQUIRE(Options::GetSeparator().empty());
-        REQUIRE(Options::GetBasePath().empty());
-        REQUIRE(Options::GetTemplateName().empty());
-        REQUIRE(Options::GetMask().empty());
-        REQUIRE(Options::GetPath().empty());
-        REQUIRE(!Options::GetAddHeader());
-        REQUIRE(!Options::GetOpenFilesInNotepad());
-        REQUIRE(!Options::GetSkipWholeMatch());
-        REQUIRE(!Options::GetFilterUnique());
-        REQUIRE(!Options::GetCaseInsensitive());
-        REQUIRE(!Options::GetDotMatchNewline());
-        REQUIRE(!Options::GetInSelection());
+        REQUIRE((bool)(Options::extract_mode() == Options::en_ExtractMode::ExtractInSingleFile));
+        REQUIRE((bool)(Options::extract_mode_single_file() == Options::en_ExtractModeSingleFile::PrettyPrint));
+        REQUIRE((bool)(Options::save_mode() == Options::en_SaveMode::ExtractToNotepad));
+        REQUIRE((bool)(Options::extract_case_conversion() == Options::en_ExtractCaseConversion::NoConversion));
+        REQUIRE((bool)(Options::sort_mode() == Options::en_SortMode::NoSort));
+        REQUIRE((bool)(Options::data_location() == Options::en_DataLocation::CurrentFile));
+        REQUIRE(Options::find_history().empty());
+        REQUIRE(Options::replace_history().empty());
+        REQUIRE(Options::separator().empty());
+        REQUIRE(Options::base_path().empty());
+        REQUIRE(Options::template_name().empty());
+        REQUIRE(Options::files_masks().empty());
+        REQUIRE(Options::files_paths().empty());
+        REQUIRE(!Options::add_header());
+        REQUIRE(!Options::open_files_in_notepad());
+        REQUIRE(!Options::skip_whole_match());
+        REQUIRE(!Options::filter_unique());
+        REQUIRE(!Options::case_insensitive());
+        REQUIRE(!Options::dot_match_newline());
+        REQUIRE(!Options::in_selection());
 
         REQUIRE(Options::GetOptionsFilePath().empty());
     }
@@ -55,26 +55,26 @@ TEST_CASE("Initialization checks", "[initialization]")
         REQUIRE(fs::exists(g_options_file_path));
         
         // Check defaults as set by CreateDefault
-        REQUIRE(Options::GetSeparator() == std::wstring(L"\\t"));
-        REQUIRE(Options::GetTemplateName() == std::wstring(L"Group_%d.txt"));
-        REQUIRE((bool)(Options::GetExtractMode() == Options::en_ExtractMode::ExtractInSingleFile));
-        REQUIRE((bool)(Options::GetExtractModeSingleFile() == Options::en_ExtractModeSingleFile::PrettyPrint));
-        REQUIRE((bool)(Options::GetSaveMode() == Options::en_SaveMode::ExtractToNotepad));
-        REQUIRE((bool)(Options::GetExtractCaseConversion() == Options::en_ExtractCaseConversion::NoConversion));
-        REQUIRE((bool)(Options::GetSortMode() == Options::en_SortMode::NoSort));
-        REQUIRE((bool)(Options::GetDataLocation() == Options::en_DataLocation::CurrentFile));
-        REQUIRE(Options::GetFindHistory().empty());
-        REQUIRE(Options::GetReplaceHistory().empty());
-        REQUIRE(Options::GetBasePath().empty());
-        REQUIRE(Options::GetMask().empty());
-        REQUIRE(Options::GetPath().empty());
-        REQUIRE(!Options::GetAddHeader());
-        REQUIRE(!Options::GetOpenFilesInNotepad());
-        REQUIRE(!Options::GetSkipWholeMatch());
-        REQUIRE(!Options::GetFilterUnique());
-        REQUIRE(!Options::GetCaseInsensitive());
-        REQUIRE(!Options::GetDotMatchNewline());
-        REQUIRE(!Options::GetInSelection());
+        REQUIRE(Options::separator() == std::wstring(L"\\t"));
+        REQUIRE(Options::template_name() == std::wstring(L"Group_%d.txt"));
+        REQUIRE((bool)(Options::extract_mode() == Options::en_ExtractMode::ExtractInSingleFile));
+        REQUIRE((bool)(Options::extract_mode_single_file() == Options::en_ExtractModeSingleFile::PrettyPrint));
+        REQUIRE((bool)(Options::save_mode() == Options::en_SaveMode::ExtractToNotepad));
+        REQUIRE((bool)(Options::extract_case_conversion() == Options::en_ExtractCaseConversion::NoConversion));
+        REQUIRE((bool)(Options::sort_mode() == Options::en_SortMode::NoSort));
+        REQUIRE((bool)(Options::data_location() == Options::en_DataLocation::CurrentFile));
+        REQUIRE(Options::find_history().empty());
+        REQUIRE(Options::replace_history().empty());
+        REQUIRE(Options::base_path().empty());
+        REQUIRE(Options::files_masks().empty());
+        REQUIRE(Options::files_paths().empty());
+        REQUIRE(!Options::add_header());
+        REQUIRE(!Options::open_files_in_notepad());
+        REQUIRE(!Options::skip_whole_match());
+        REQUIRE(!Options::filter_unique());
+        REQUIRE(!Options::case_insensitive());
+        REQUIRE(!Options::dot_match_newline());
+        REQUIRE(!Options::in_selection());
     }
 
 }
@@ -86,81 +86,81 @@ TEST_CASE("Save\\load checks", "[save_load]")
         REQUIRE(fs::exists(g_options_file_path));
 
         // Check defaults as set by CreateDefault
-        REQUIRE(Options::GetSeparator() == std::wstring(L"\\t"));
-        REQUIRE(Options::GetTemplateName() == std::wstring(L"Group_%d.txt"));
+        REQUIRE(Options::separator() == std::wstring(L"\\t"));
+        REQUIRE(Options::template_name() == std::wstring(L"Group_%d.txt"));
     }
 
     SECTION("Change all fields and save them")
     {
-        Options::GetExtractMode() = Options::en_ExtractMode::ExtractWithReplace;
-        Options::GetExtractModeSingleFile() = Options::en_ExtractModeSingleFile::WithSeparator;
-        Options::GetSaveMode() = Options::en_SaveMode::SaveAsNewFile;
-        Options::GetExtractCaseConversion() = Options::en_ExtractCaseConversion::AllLowercase;
-        Options::GetSortMode() = Options::en_SortMode::SortAscending;
-        Options::GetDataLocation() = Options::en_DataLocation::SpecificFiles;
+        Options::extract_mode() = Options::en_ExtractMode::ExtractWithReplace;
+        Options::extract_mode_single_file() = Options::en_ExtractModeSingleFile::WithSeparator;
+        Options::save_mode() = Options::en_SaveMode::SaveAsNewFile;
+        Options::extract_case_conversion() = Options::en_ExtractCaseConversion::AllLowercase;
+        Options::sort_mode() = Options::en_SortMode::SortAscending;
+        Options::data_location() = Options::en_DataLocation::SpecificFiles;
         long long i = 0;
-        Options::GetFindHistory().push_back(std::to_wstring(i++));
-        Options::GetReplaceHistory().push_back(std::to_wstring(i++));
-        Options::GetSeparator() = std::to_wstring(i++);
-        Options::GetBasePath().push_back(std::to_wstring(i++));
-        Options::GetTemplateName() = std::to_wstring(i++);
-        Options::GetMask().push_back(std::to_wstring(i++));
-        Options::GetPath().push_back(std::to_wstring(i++));
-        Options::GetAddHeader() = true;
-        Options::GetOpenFilesInNotepad() = true;
-        Options::GetSkipWholeMatch() = true;
-        Options::GetFilterUnique() = true;
-        Options::GetCaseInsensitive() = true;
-        Options::GetDotMatchNewline() = true;
-        Options::GetInSelection() = true;
+        Options::find_history().push_back(std::to_wstring(i++));
+        Options::replace_history().push_back(std::to_wstring(i++));
+        Options::separator() = std::to_wstring(i++);
+        Options::base_path().push_back(std::to_wstring(i++));
+        Options::template_name() = std::to_wstring(i++);
+        Options::files_masks().push_back(std::to_wstring(i++));
+        Options::files_paths().push_back(std::to_wstring(i++));
+        Options::add_header() = true;
+        Options::open_files_in_notepad() = true;
+        Options::skip_whole_match() = true;
+        Options::filter_unique() = true;
+        Options::case_insensitive() = true;
+        Options::dot_match_newline() = true;
+        Options::in_selection() = true;
         Options::SaveOptions();
 
         // Revert changes
-        Options::GetExtractMode() = Options::en_ExtractMode::ExtractInSingleFile;
-        Options::GetExtractModeSingleFile() = Options::en_ExtractModeSingleFile::WithSeparator;
-        Options::GetSaveMode() = Options::en_SaveMode::ExtractToNotepad;
-        Options::GetExtractCaseConversion() = Options::en_ExtractCaseConversion::NoConversion;
-        Options::GetSortMode() = Options::en_SortMode::NoSort;
-        Options::GetDataLocation() = Options::en_DataLocation::CurrentFile;
-        Options::GetFindHistory().clear();
-        Options::GetReplaceHistory().clear();
-        Options::GetSeparator().clear();
-        Options::GetBasePath().clear();
-        Options::GetTemplateName().clear();
-        Options::GetMask().clear();
-        Options::GetPath().clear();
-        Options::GetAddHeader() = false;
-        Options::GetOpenFilesInNotepad() = false;
-        Options::GetSkipWholeMatch() = false;
-        Options::GetFilterUnique() = false;
-        Options::GetCaseInsensitive() = false;
-        Options::GetDotMatchNewline() = false;
-        Options::GetInSelection() = false;
+        Options::extract_mode() = Options::en_ExtractMode::ExtractInSingleFile;
+        Options::extract_mode_single_file() = Options::en_ExtractModeSingleFile::WithSeparator;
+        Options::save_mode() = Options::en_SaveMode::ExtractToNotepad;
+        Options::extract_case_conversion() = Options::en_ExtractCaseConversion::NoConversion;
+        Options::sort_mode() = Options::en_SortMode::NoSort;
+        Options::data_location() = Options::en_DataLocation::CurrentFile;
+        Options::find_history().clear();
+        Options::replace_history().clear();
+        Options::separator().clear();
+        Options::base_path().clear();
+        Options::template_name().clear();
+        Options::files_masks().clear();
+        Options::files_paths().clear();
+        Options::add_header() = false;
+        Options::open_files_in_notepad() = false;
+        Options::skip_whole_match() = false;
+        Options::filter_unique() = false;
+        Options::case_insensitive() = false;
+        Options::dot_match_newline() = false;
+        Options::in_selection() = false;
     }
 
     auto saved_values_check = [&]
     {
-        REQUIRE((bool)(Options::GetExtractMode() == Options::en_ExtractMode::ExtractWithReplace));
-        REQUIRE((bool)(Options::GetExtractModeSingleFile() == Options::en_ExtractModeSingleFile::WithSeparator));
-        REQUIRE((bool)(Options::GetSaveMode() == Options::en_SaveMode::SaveAsNewFile));
-        REQUIRE((bool)(Options::GetExtractCaseConversion() == Options::en_ExtractCaseConversion::AllLowercase));
-        REQUIRE((bool)(Options::GetSortMode() == Options::en_SortMode::SortAscending));
-        REQUIRE((bool)(Options::GetDataLocation() == Options::en_DataLocation::SpecificFiles));
+        REQUIRE((bool)(Options::extract_mode() == Options::en_ExtractMode::ExtractWithReplace));
+        REQUIRE((bool)(Options::extract_mode_single_file() == Options::en_ExtractModeSingleFile::WithSeparator));
+        REQUIRE((bool)(Options::save_mode() == Options::en_SaveMode::SaveAsNewFile));
+        REQUIRE((bool)(Options::extract_case_conversion() == Options::en_ExtractCaseConversion::AllLowercase));
+        REQUIRE((bool)(Options::sort_mode() == Options::en_SortMode::SortAscending));
+        REQUIRE((bool)(Options::data_location() == Options::en_DataLocation::SpecificFiles));
         long long i = 0;
-        REQUIRE(Options::GetFindHistory().back() == std::to_wstring(i++));
-        REQUIRE(Options::GetReplaceHistory().back() == std::to_wstring(i++));
-        REQUIRE(Options::GetSeparator() == std::to_wstring(i++));
-        REQUIRE(Options::GetBasePath().back() == std::to_wstring(i++));
-        REQUIRE(Options::GetTemplateName() == std::to_wstring(i++));
-        REQUIRE(Options::GetMask().back() == std::to_wstring(i++));
-        REQUIRE(Options::GetPath().back() == std::to_wstring(i++));
-        REQUIRE(Options::GetAddHeader());
-        REQUIRE(Options::GetOpenFilesInNotepad());
-        REQUIRE(Options::GetSkipWholeMatch());
-        REQUIRE(Options::GetFilterUnique());
-        REQUIRE(Options::GetCaseInsensitive());
-        REQUIRE(!Options::GetDotMatchNewline()); // Setting is not saved
-        REQUIRE(Options::GetInSelection());
+        REQUIRE(Options::find_history().back() == std::to_wstring(i++));
+        REQUIRE(Options::replace_history().back() == std::to_wstring(i++));
+        REQUIRE(Options::separator() == std::to_wstring(i++));
+        REQUIRE(Options::base_path().back() == std::to_wstring(i++));
+        REQUIRE(Options::template_name() == std::to_wstring(i++));
+        REQUIRE(Options::files_masks().back() == std::to_wstring(i++));
+        REQUIRE(Options::files_paths().back() == std::to_wstring(i++));
+        REQUIRE(Options::add_header());
+        REQUIRE(Options::open_files_in_notepad());
+        REQUIRE(Options::skip_whole_match());
+        REQUIRE(Options::filter_unique());
+        REQUIRE(Options::case_insensitive());
+        REQUIRE(!Options::dot_match_newline()); // Setting is not saved
+        REQUIRE(Options::in_selection());
     };
 
     SECTION("Load saved settings and check that they are as initialy modified")
@@ -189,19 +189,19 @@ TEST_CASE("Save\\load checks", "[save_load]")
 
     SECTION("List type settings should save and load in the same order")
     {
-        Options::GetFindHistory().clear();
+        Options::find_history().clear();
         
         int i = 0;
-        std::generate_n(std::back_inserter(Options::GetFindHistory()), 16, 
+        std::generate_n(std::back_inserter(Options::find_history()), 16, 
                         [&i]
                         {
                             return fmt::format(L"[A-Z]+_{}", i++);
                         });
-        auto v = Options::GetFindHistory();
+        auto v = Options::find_history();
         Options::SaveOptions();
         
-        Options::GetFindHistory().clear();
+        Options::find_history().clear();
         Options::LoadOptions();
-        REQUIRE(Options::GetFindHistory() == v);
+        REQUIRE(Options::find_history() == v);
     }
 }

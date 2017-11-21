@@ -5,20 +5,20 @@
 
 #include <wxx_wincore.h>
 #include <wxx_dialog.h>
-#include "SearchDialog.hpp"
-#include "Base.h"
-#include "Helpers.h"
-#include "FolderBrowserDialog.h"
-#include "resource.h"
+#include "../inc/SearchDialog.hpp"
+#include "../inc/Base.h"
+#include "../inc/Helpers.h"
+#include "../inc/FolderBrowserDialog.h"
+#include "../resources/resource.h"
 
-#include "DataExtractorSingleFile.hpp"
-#include "DataExtractorMultipleFiles.hpp"
-#include "DataExtractorNotepadSingle.hpp"
-#include "DataExtractorNotepadMultiple.hpp"
-#include "DataPath.hpp"
-#include "DataString.hpp"
-#include "OutputDataProcessorSingleFile.hpp"
-#include "OutputDataProcessorMultipleFiles.hpp"
+#include "../inc/DataExtractorSingleFile.hpp"
+#include "../inc/DataExtractorMultipleFiles.hpp"
+#include "../inc/DataExtractorNotepadSingle.hpp"
+#include "../inc/DataExtractorNotepadMultiple.hpp"
+#include "../inc/DataPath.hpp"
+#include "../inc/DataString.hpp"
+#include "../inc/OutputDataProcessorSingleFile.hpp"
+#include "../inc/OutputDataProcessorMultipleFiles.hpp"
 #include <npp\NppPluginIface.h>
 #include <boost\algorithm\string\replace.hpp>
 
@@ -568,7 +568,7 @@ void SearchDialog::UpdateTitle(CString& sText)
 	if (!sText.IsEmpty())
 	{
 		title += L" - ";
-		title += sText.c_str();
+		title += sText;
 	}
 	this->SetWindowText(title);
 }

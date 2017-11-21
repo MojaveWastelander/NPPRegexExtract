@@ -1,5 +1,5 @@
-#include "DataExtractorSingleFile.hpp"
-#include "Encoding.hpp"
+#include "../inc/DataExtractorSingleFile.hpp"
+#include "../inc/Encoding.hpp"
 
 bool DataExtractorSingleFile::ExtractData(IOutputDataProcessor* pDataProcessor)
 {

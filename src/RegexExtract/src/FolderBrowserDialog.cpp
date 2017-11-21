@@ -1,6 +1,4 @@
-#include "FolderBrowserDialog.h"
-
-#include "FolderBrowserDialog.h"
+#include "../inc/FolderBrowserDialog.h"
 
 FolderBrowserDialog::FolderBrowserDialog(void)
 {

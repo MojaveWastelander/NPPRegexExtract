@@ -19,12 +19,12 @@
  *  This is the main Notepad++ Plugin file for use with Notepad++ Plugin Interface Lib.
  *
  */
-#include "NppPlugin.h"
+#include "../inc/NppPlugin.h"
+#include "../inc/SearchDialog.hpp"
+#include "../resources/resource.h"
 #include <WinUser.h>
 #include <thread>
-#include "resource.h"
 #include <wxx_wincore.h>
-#include "SearchDialog.hpp"
 /*
  *  The v_getfuncarray namespace alias allows for emulation of a class's 'virtual' function by
  *  providing a 'symlink' like pointer to whichever npp_plugin namsespace extension that will

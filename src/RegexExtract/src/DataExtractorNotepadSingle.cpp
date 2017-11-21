@@ -1,4 +1,4 @@
-#include "DataExtractorNotepadSingle.hpp"
+#include "../inc/DataExtractorNotepadSingle.hpp"
 
 DataExtractorNotepadSingle::~DataExtractorNotepadSingle(void)
 {

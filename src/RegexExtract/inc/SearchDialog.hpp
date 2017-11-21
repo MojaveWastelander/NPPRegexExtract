@@ -8,10 +8,10 @@
 #include <wxx_stdcontrols.h>
 #include <wxx_controls.h>
 #include <memory>
-#include "RegexSearch.hpp"
-#include "IDataKind.hpp"
-#include "IDataExtractor.hpp"
-#include "IOutputDataProcessor.hpp"
+#include "../inc/RegexSearch.hpp"
+#include "../inc/IDataKind.hpp"
+#include "../inc/IDataExtractor.hpp"
+#include "../inc/IOutputDataProcessor.hpp"
 #include <npp\SciMessager.h>
 #include <npp\NppMessager.h>
 

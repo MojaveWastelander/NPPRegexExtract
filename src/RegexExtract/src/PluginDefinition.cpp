@@ -18,7 +18,7 @@
 #include <npp\PluginDefinition.h>
 #include <npp\menuCmdID.h>
 #include <string>
-#include "resource.h"
+#include "../resources/resource.h"
 
 
 
