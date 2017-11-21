@@ -11,6 +11,7 @@ public:
         IDataKind(wsRef) { m_wsRawTextData.assign(std::move(m_wsRef)); }
     DataKindString(std::wstring&& wsRef):
         IDataKind(std::move(wsRef)) { m_wsRawTextData.assign(std::move(m_wsRef)); }
+    DataKindString(DataKindString&& rref) { m_wsRawTextData = std::move(rref.m_wsRawTextData); }
 public:
     // Does nothing as data is assigned at construnction
     void GetData() {}

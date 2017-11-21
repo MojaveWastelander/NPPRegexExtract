@@ -347,7 +347,7 @@ void SearchDialog::OnSearch(bool bShowResults)
             {
                 strStat.Format(L"Found %d matches in %.2fs.", m_RegexSearch.GetMatchesCount(), msec.count() / 1000.f);
             }
-			UpdateTitle(strStat);
+            UpdateTitle(strStat);
         }
     }
     catch (std::exception& e)
@@ -380,7 +380,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
                 std::vector<char> vTemp(m_SciMessager.getTextLength() + 1);
                // LOG(INFO) << "Text size: " << vTemp.size();
                 m_SciMessager.getText(static_cast<int>(vTemp.size() - 1), &vTemp[0]);
-                return std::unique_ptr<IDataKind>(new DataKindString(utf8util::UTF16FromUTF8(&vTemp[0])));
+                return std::make_unique<DataKindString>(utf8util::UTF16FromUTF8(&vTemp[0]));
             }
             else
             {
@@ -389,7 +389,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
                 std::vector<char> vTemp(m_SciMessager.getSelText(nullptr) + 1);
                // LOG(INFO) << "Text size: " << vTemp.size();
                 m_SciMessager.getSelText(&vTemp[0]);
-                return std::unique_ptr<IDataKind>(new DataKindString(utf8util::UTF16FromUTF8(&vTemp[0])));
+                return std::make_unique<DataKindString>(utf8util::UTF16FromUTF8(&vTemp[0]));
             }
         }
         else
@@ -564,13 +564,13 @@ void SearchDialog::OnExtract()
 
 void SearchDialog::UpdateTitle(CString& sText)
 {
-	CString title = L"RegexExtract";
-	if (!sText.IsEmpty())
-	{
-		title += L" - ";
-		title += sText;
-	}
-	this->SetWindowText(title);
+    CString title = L"RegexExtract";
+    if (!sText.IsEmpty())
+    {
+        title += L" - ";
+        title += sText;
+    }
+    this->SetWindowText(title);
 }
 
 void SearchDialog::GetComboboxTitle(Win32xx::CComboBox& cbx, std::vector<std::wstring> &vData)

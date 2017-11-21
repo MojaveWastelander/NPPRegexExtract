@@ -3,7 +3,7 @@
 bool RegexSearch::ParseData(IDataKind* pDataKind, IOutputDataProcessor* pDataProcessor)
 {
     bool bMatch = false;
-    std::wsregex_iterator itPos(pDataKind->GetRawTextData().begin(), pDataKind->GetRawTextData().end(), m_rxExpression);
+    std::wsregex_iterator itPos(pDataKind->raw_text_data().begin(), pDataKind->raw_text_data().end(), m_rxExpression);
     std::wsregex_iterator itEnd;
     for (; itPos != itEnd; ++itPos)
     {

@@ -5,6 +5,7 @@
 class IDataKind
 {
 public:
+    IDataKind() = default;
     IDataKind(const std::wstring& wsRef):
         m_wsRef{wsRef}, m_bParsed(false), m_bMatched(false) {; }
 
@@ -25,10 +26,10 @@ public:
     bool IsMatched() const { return m_bMatched; }
 
     /// Gets reference to original data location string (path, URL, string).
-    const std::wstring& GetRef() const { return m_wsRef; }
+    const std::wstring& data_location() const { return m_wsRef; }
 
     /// Gets raw text data from location specified by m_wsRef.
-    const std::wstring& GetRawTextData() const { return m_wsRawTextData; }
+    const std::wstring& raw_text_data() const { return m_wsRawTextData; }
     virtual ~IDataKind(void) {}
 protected:
     std::wstring m_wsRef; //< Reference to data location
