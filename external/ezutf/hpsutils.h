@@ -1,7 +1,9 @@
 // Minimal, exportable version of HPSLIB
 // Copyright (c) 2007, AlpineSoft http://www.alpinesoft.co.uk
 
-#define _CRT_SECURE_NO_WARNINGS
+#ifndef _CRT_SECURE_NO_WARNINGS
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
 
 //#define WIN32_LEAN_AND_MEAN
 #include "windows.h"

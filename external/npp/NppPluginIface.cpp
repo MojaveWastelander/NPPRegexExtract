@@ -135,7 +135,7 @@ void setPluginFuncItem(tstring Name, PFUNCPLUGINCMD pFunction,
 
 	FuncItem thisFunction;
 
-	Name.copy(thisFunction._itemName, Name.length());
+	Name = thisFunction._itemName;
 	thisFunction._itemName[ Name.length() ] = '\0';
 
 	thisFunction._cmdID = cmdID;
