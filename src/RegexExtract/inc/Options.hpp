@@ -9,6 +9,7 @@
 #include <locale>
 #include <type_traits>
 #include <fstream>
+#include <experimental\filesystem>
 
 
 template <class S, class E>
@@ -116,12 +117,12 @@ public:
     /// Loads options from XML file.
     ///
     /// \return true if it succeeds, false if it fails.
-    static bool LoadOptions();
+    static bool load_options();
 
     /// Saves current options to XML file.
     ///
     /// \return true if it succeeds, false if it fails.
-    static bool SaveOptions();
+    static bool save_options();
 
     /// Initialize XML file used for loading/saving options.
     ///
@@ -130,8 +131,8 @@ public:
     ///
     /// \return true if it succeeds, false if it fails.
 
-    static bool Init(const std::wstring& wsOptionsFilePath, bool bCreateDefaultIfNotExist = true);
-    static const std::wstring& GetOptionsFilePath() { return get().m_wsOptionsFilePath; }
+    static bool initialize(const std::wstring& wsOptionsFilePath, bool bCreateDefaultIfNotExist = true);
+    static const std::wstring& options_file_path() { return get().m_wsOptionsFilePath; }
 
 private:
     /// All functions below made private to prohibit multiple object creation.
@@ -179,7 +180,7 @@ private:
     std::vector<std::wstring> m_files_paths;  
 
     /// Creates a default configuration in case of loading errors or no actual options present.
-    static void CreateDefault();
+    static void restore_default_settings();
 };
 
 /// Class used to convert strings from edit boxes, XML files etc. to C++ equivalents.

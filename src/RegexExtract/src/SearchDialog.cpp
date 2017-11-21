@@ -37,7 +37,7 @@ INT_PTR SearchDialog::DialogProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
     {
         SaveSettings();
-        if (Options::SaveOptions() == false)
+        if (Options::save_options() == false)
         {
             ::MessageBox(nullptr, L"Settings file not saved", L"RegexExtract", MB_ICONEXCLAMATION);
         }
@@ -310,7 +310,7 @@ void SearchDialog::SaveSettings()
     Options::in_selection() = (IsChecked(m_chkFromSelection)) ? true : false;
 
     //TODO: Check if search was done already
-    Options::get().SaveOptions();
+    Options::get().save_options();
     m_upDataProcessor = GetDataProcessor();
     m_upDataExtractor.reset(GetDataExtractor());
 }
@@ -379,7 +379,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
                // LOG(INFO) << "Get all text from current document";
                 std::vector<char> vTemp(m_SciMessager.getTextLength() + 1);
                // LOG(INFO) << "Text size: " << vTemp.size();
-                m_SciMessager.getText(vTemp.size() - 1, &vTemp[0]);
+                m_SciMessager.getText(static_cast<int>(vTemp.size() - 1), &vTemp[0]);
                 return std::unique_ptr<IDataKind>(new DataKindString(utf8util::UTF16FromUTF8(&vTemp[0])));
             }
             else
@@ -430,7 +430,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
             m_NPPMessager.SendNppMsg(NPPM_SWITCHTOFILE, 0, (LPARAM)vOpenedFiles.back().c_str());
             // Get all text from current document
             std::vector<char> vTemp(m_SciMessager.getTextLength() + 1);
-            m_SciMessager.getText(vTemp.size() - 1, &vTemp[0]);
+            m_SciMessager.getText(static_cast<int>(vTemp.size() - 1), &vTemp[0]);
             vOpenedFiles.pop_back();
             return std::unique_ptr<IDataKind>(new DataKindString(utf8util::UTF16FromUTF8(&vTemp[0])));
         }

@@ -39,7 +39,7 @@ TEST_CASE("Initialization checks", "[initialization]")
         REQUIRE(!Options::dot_match_newline());
         REQUIRE(!Options::in_selection());
 
-        REQUIRE(Options::GetOptionsFilePath().empty());
+        REQUIRE(Options::options_file_path().empty());
     }
 
     SECTION("No option file initialization")
@@ -47,14 +47,14 @@ TEST_CASE("Initialization checks", "[initialization]")
         fs::remove(g_options_file_path);
         // With second argument as false and no options file exists - function should fail
         REQUIRE(!fs::exists(g_options_file_path));
-        REQUIRE(!Options::Init(g_options_file_path, false));
+        REQUIRE(!Options::initialize(g_options_file_path, false));
         REQUIRE(!fs::exists(g_options_file_path));
 
         // in this case it should create a new options file with default settings
-        REQUIRE(Options::Init(g_options_file_path));
+        REQUIRE(Options::initialize(g_options_file_path));
         REQUIRE(fs::exists(g_options_file_path));
         
-        // Check defaults as set by CreateDefault
+        // Check defaults as set by restore_default_settings
         REQUIRE(Options::separator() == std::wstring(L"\\t"));
         REQUIRE(Options::template_name() == std::wstring(L"Group_%d.txt"));
         REQUIRE((bool)(Options::extract_mode() == Options::en_ExtractMode::ExtractInSingleFile));
@@ -85,7 +85,7 @@ TEST_CASE("Save\\load checks", "[save_load]")
     {
         REQUIRE(fs::exists(g_options_file_path));
 
-        // Check defaults as set by CreateDefault
+        // Check defaults as set by restore_default_settings
         REQUIRE(Options::separator() == std::wstring(L"\\t"));
         REQUIRE(Options::template_name() == std::wstring(L"Group_%d.txt"));
     }
@@ -113,7 +113,7 @@ TEST_CASE("Save\\load checks", "[save_load]")
         Options::case_insensitive() = true;
         Options::dot_match_newline() = true;
         Options::in_selection() = true;
-        Options::SaveOptions();
+        Options::save_options();
 
         // Revert changes
         Options::extract_mode() = Options::en_ExtractMode::ExtractInSingleFile;
@@ -165,7 +165,7 @@ TEST_CASE("Save\\load checks", "[save_load]")
 
     SECTION("Load saved settings and check that they are as initialy modified")
     {
-        Options::LoadOptions();
+        Options::load_options();
         saved_values_check();
     }
 
@@ -173,17 +173,17 @@ TEST_CASE("Save\\load checks", "[save_load]")
     {
         // Removing options file should not affect current state
         fs::remove(g_options_file_path);
-        REQUIRE(!Options::LoadOptions());
+        REQUIRE(!Options::load_options());
         saved_values_check();
     
         // create new empty options file
         // if a field fails to be loaded it will keep old value
         std::wofstream f{g_options_file_path};
-        REQUIRE(Options::LoadOptions());
+        REQUIRE(Options::load_options());
         saved_values_check();
 
         // Save stored settings, values should stay the same
-        Options::SaveOptions();
+        Options::save_options();
         saved_values_check();
     }
 
@@ -198,10 +198,10 @@ TEST_CASE("Save\\load checks", "[save_load]")
                             return fmt::format(L"[A-Z]+_{}", i++);
                         });
         auto v = Options::find_history();
-        Options::SaveOptions();
+        Options::save_options();
         
         Options::find_history().clear();
-        Options::LoadOptions();
+        Options::load_options();
         REQUIRE(Options::find_history() == v);
     }
 }

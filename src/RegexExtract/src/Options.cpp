@@ -10,7 +10,7 @@
 #include <iostream>
 #include <iomanip>
 
-//namespace ti = tinyxml2;
+namespace fs = std::experimental::filesystem;
 
 #ifdef __LOG_DLL
 #include <chrono>
@@ -65,14 +65,14 @@ Options& Options::get()
     return instance;
 }
 
-bool Options::LoadOptions()
+bool Options::load_options()
 {
     using boost::property_tree::wptree;
     using VectorStrings = std::vector<std::wstring>;
     try
     {
         wptree pt;
-        std::wifstream opt{Options::GetOptionsFilePath()};
+        std::wifstream opt{Options::options_file_path()};
         if (!opt.good()) return false;
         boost::property_tree::read_xml(opt, pt);
         auto get_list_values = [&pt](std::vector<std::wstring>& v, const wchar_t* path)
@@ -115,13 +115,13 @@ bool Options::LoadOptions()
     }
     catch (std::exception& e)
     {
-        //LOG(INFO) << e.what();
+        std::cerr << e.what();
         return false;
     }
     return true;
 }
 
-void Options::CreateDefault()
+void Options::restore_default_settings()
 {
     find_history().clear();
     replace_history().clear();
@@ -145,7 +145,7 @@ void Options::CreateDefault()
     //GetDotMatchNewline() = false;    
 }
 
-bool Options::SaveOptions()
+bool Options::save_options()
 {
     using boost::property_tree::wptree;
 
@@ -153,7 +153,7 @@ bool Options::SaveOptions()
 
     try
     {
-	    wptree pt;
+        wptree pt;
         auto set_list_values = [&](const wchar_t* p_setting_path, const auto& container)
         {
             int i = 0;
@@ -167,53 +167,59 @@ bool Options::SaveOptions()
         };	    
         
         // Extract options
-	    pt.put(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", extract_mode());
-	    pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", extract_mode_single_file());
+        pt.put(L"root.ExtractOptions.ExtractMode.<xmlattr>.mode", extract_mode());
+        pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.<xmlattr>.mode", extract_mode_single_file());
         pt.put(L"root.ExtractOptions.ExtractMode.SingleFileMode.Separator", separator());
-	    pt.put(L"root.ExtractOptions.ExtractMode.AddHeader", add_header());
-	
-	    pt.put(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", save_mode());
+        pt.put(L"root.ExtractOptions.ExtractMode.AddHeader", add_header());
+    
+        pt.put(L"root.ExtractOptions.SaveMode.<xmlattr>.mode", save_mode());
         set_list_values(L"root.ExtractOptions.BasePaths.Path", base_path());
 
         pt.put(L"root.ExtractOptions.SaveMode.TemplateName", template_name());
-	    pt.put(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", open_files_in_notepad());
-	
-	    pt.put(L"root.ExtractOptions.ExtractCaseConversion", extract_case_conversion());
-	    pt.put(L"root.ExtractOptions.SkipWholeRegexMatch", skip_whole_match());
-	
-	    pt.put(L"root.SearchOptions.SortMode", sort_mode());
-	    pt.put(L"root.SearchOptions.FilterUnique", filter_unique());
-	    pt.put(L"root.SearchOptions.CaseInsensitive", case_insensitive());
-	
+        pt.put(L"root.ExtractOptions.SaveMode.OpenFilesInNotepad", open_files_in_notepad());
+    
+        pt.put(L"root.ExtractOptions.ExtractCaseConversion", extract_case_conversion());
+        pt.put(L"root.ExtractOptions.SkipWholeRegexMatch", skip_whole_match());
+    
+        pt.put(L"root.SearchOptions.SortMode", sort_mode());
+        pt.put(L"root.SearchOptions.FilterUnique", filter_unique());
+        pt.put(L"root.SearchOptions.CaseInsensitive", case_insensitive());
+    
         set_list_values(L"root.History.Find.RegEx", find_history());
         set_list_values(L"root.History.Replace.RegEx", replace_history());
-	
-	    pt.put(L"root.DataLocation.<xmlattr>.mode", data_location());
+    
+        pt.put(L"root.DataLocation.<xmlattr>.mode", data_location());
         set_list_values(L"root.DataLocation.Masks.Mask", files_masks());
         set_list_values(L"root.DataLocation.Paths.Path", files_paths());
 
         pt.put(L"root.DataLocation.InSelection", in_selection());
+        
 
-	    std::wofstream opt{Options::GetOptionsFilePath()};
+        fs::path options_file{Options::options_file_path()};
+        if (!fs::exists(options_file))
+        {
+            fs::create_directories(options_file.parent_path());
+        }
+        std::wofstream opt{Options::options_file_path()};
         if (!opt.good()) return false;
-	    boost::property_tree::write_xml(opt, pt, boost::property_tree::xml_parser::xml_writer_settings<boost::property_tree::wptree::key_type>(L' ', 4));
+        boost::property_tree::write_xml(opt, pt, boost::property_tree::xml_parser::xml_writer_settings<boost::property_tree::wptree::key_type>(L' ', 4));
     }
     catch (std::exception& e)
     {
-        // out error
+        std::cerr << e.what();
         return false;
     }
     return true;
 }
 
-bool Options::Init( const std::wstring& wsOptionsFilePath, bool bCreateDefaultIfNotExist /*= true*/ )
+bool Options::initialize( const std::wstring& wsOptionsFilePath, bool bCreateDefaultIfNotExist /*= true*/ )
 {
    get().m_wsOptionsFilePath = wsOptionsFilePath;
-   bool bOptions = LoadOptions();
+   bool bOptions = load_options();
    if (bCreateDefaultIfNotExist && !bOptions)
    {
-       CreateDefault();
-       return SaveOptions();
+       restore_default_settings();
+       return save_options();
    }
    return bOptions;
 }

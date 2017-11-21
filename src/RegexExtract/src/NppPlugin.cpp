@@ -63,7 +63,7 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD reasonForCall, LPVOID /*lpReserved*/
            std::experimental::filesystem::path p{vPath.begin(), vPath.end()};
            p = p.parent_path();
            p += "\\";
-           if (!Options::Init(p.wstring() + L"Config\\RegexExtractSettings.xml"))
+           if (!Options::initialize(p.wstring() + L"Config\\RegexExtractSettings.xml"))
            {
                ::MessageBox(nullptr, (std::wstring(L"Failed to open settings file: ") + p.wstring() + L"Config\\RegexExtractSettings.xml").c_str(), L"RegexExtract", MB_ICONEXCLAMATION);
            }
