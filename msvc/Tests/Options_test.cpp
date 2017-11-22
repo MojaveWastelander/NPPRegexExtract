@@ -16,8 +16,7 @@ std::wstring g_options_file_path = L"./config/options.xml";
 TEST_CASE("Initialization checks", "[initialization]") 
 {
     SECTION("Default values in class")
-    {
-
+    {         
         REQUIRE((bool)(Options::extract_mode() == Options::en_ExtractMode::ExtractInSingleFile));
         REQUIRE((bool)(Options::extract_mode_single_file() == Options::en_ExtractModeSingleFile::PrettyPrint));
         REQUIRE((bool)(Options::save_mode() == Options::en_SaveMode::ExtractToNotepad));

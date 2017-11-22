@@ -119,7 +119,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).exe</Command>
+      <Command>REM $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName).exe</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -171,8 +171,13 @@
     <ClCompile Include="..\..\external\ezutf\textfile.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\src\DataPath.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\src\DataString.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\IOutputDataProcessor.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\src\Options.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\OutputDataProcessorSingleFile.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\RegexSearch.cpp" />
     <ClCompile Include="IDataKind_tests.cpp" />
+    <ClCompile Include="OutputDataProcessorSingleFile_tests.cpp" />
+    <ClCompile Include="RegexSearch_test.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Options_test.cpp" />
   </ItemGroup>

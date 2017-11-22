@@ -56,5 +56,20 @@
     <ClCompile Include="..\..\src\RegexExtract\src\Options.cpp">
       <Filter>ExternalFiles</Filter>
     </ClCompile>
+    <ClCompile Include="RegexSearch_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\OutputDataProcessorSingleFile.cpp">
+      <Filter>ExternalFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\RegexSearch.cpp">
+      <Filter>ExternalFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\IOutputDataProcessor.cpp">
+      <Filter>ExternalFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputDataProcessorSingleFile_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

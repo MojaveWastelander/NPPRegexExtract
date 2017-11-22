@@ -46,7 +46,7 @@ INT_PTR SearchDialog::DialogProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
     }
     break;
     }
-
+    
     // Pass unhandled messages on to parent DialogProc
     return DialogProcDefault(uMsg, wParam, lParam);
 }
@@ -317,7 +317,7 @@ void SearchDialog::SaveSettings()
 
 void SearchDialog::OnSearch(bool bShowResults)
 {
-    SaveSettings();
+
     try
     {
         std::wstring wsExpression = m_cbxFind.GetWindowText();
@@ -349,16 +349,18 @@ void SearchDialog::OnSearch(bool bShowResults)
             }
             UpdateTitle(strStat);
         }
+        SaveSettings();
+
     }
     catch (std::exception& e)
     {
-        ::MessageBox(this->m_hWnd, utf8util::UTF16FromUTF8(e.what()).c_str(), L"RegexExtract", MB_ICONERROR);
+       ::MessageBox(this->m_hWnd, utf8util::UTF16FromUTF8(e.what()).c_str(), L"RegexExtract", MB_ICONERROR);
     }
     catch (...)
     {
        // LOG(INFO) << "Fatal exception!";
     }
-    ::SetCursor(m_curArrow);
+     ::SetCursor(m_curArrow);
 
 }
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <ExtractOptions>
+        <ExtractMode mode="2">
+            <SingleFileMode mode="0">
+                <Separator>2</Separator>
+            </SingleFileMode>
+            <AddHeader>true</AddHeader>
+        </ExtractMode>
+        <SaveMode mode="1">
+            <TemplateName>4</TemplateName>
+            <OpenFilesInNotepad>true</OpenFilesInNotepad>
+        </SaveMode>
+        <BasePaths>
+            <Path>3</Path>
+        </BasePaths>
+        <ExtractCaseConversion>2</ExtractCaseConversion>
+        <SkipWholeRegexMatch>true</SkipWholeRegexMatch>
+    </ExtractOptions>
+    <SearchOptions>
+        <SortMode>1</SortMode>
+        <FilterUnique>true</FilterUnique>
+        <CaseInsensitive>true</CaseInsensitive>
+    </SearchOptions>
+    <History>
+        <Find>
+            <RegEx>[A-Z]+_0</RegEx>
+            <RegEx>[A-Z]+_1</RegEx>
+            <RegEx>[A-Z]+_2</RegEx>
+            <RegEx>[A-Z]+_3</RegEx>
+            <RegEx>[A-Z]+_4</RegEx>
+            <RegEx>[A-Z]+_5</RegEx>
+            <RegEx>[A-Z]+_6</RegEx>
+            <RegEx>[A-Z]+_7</RegEx>
+            <RegEx>[A-Z]+_8</RegEx>
+            <RegEx>[A-Z]+_9</RegEx>
+            <RegEx>[A-Z]+_10</RegEx>
+            <RegEx>[A-Z]+_11</RegEx>
+            <RegEx>[A-Z]+_12</RegEx>
+            <RegEx>[A-Z]+_13</RegEx>
+            <RegEx>[A-Z]+_14</RegEx>
+            <RegEx>[A-Z]+_15</RegEx>
+        </Find>
+        <Replace>
+            <RegEx>1</RegEx>
+        </Replace>
+    </History>
+    <DataLocation mode="2">
+        <Masks>
+            <Mask>5</Mask>
+        </Masks>
+        <Paths>
+            <Path>6</Path>
+        </Paths>
+        <InSelection>true</InSelection>
+    </DataLocation>
+</root>

@@ -17,7 +17,7 @@ public:
     RegexSearch(std::wstring&& wsExpression):
         m_rxExpression(wsExpression, std::wregex::optimize | ((Options::case_insensitive())?std::wregex::icase:std::wregex::optimize)), m_wsExpression(wsExpression), m_uMatchesCount(0) {;}
     RegexSearch() {;}
-    void ChangeExpression(std::wstring&& wsExpression, std::wstring&& wsReplaceExpression) 
+    void ChangeExpression(std::wstring&& wsExpression, std::wstring&& wsReplaceExpression = {})
     {
         m_uMatchesCount = 0;
         m_rxExpression.assign(std::move(std::wregex(wsExpression, std::wregex::optimize | ((Options::case_insensitive())?std::wregex::icase:std::wregex::optimize))));
@@ -25,6 +25,9 @@ public:
         m_wsReplaceExpression = wsReplaceExpression;
 
     }
+
+    /// \brief Parse data with assigned regular expression and store results in output data processor object
+    /// \return true is there was at least one match 
     bool ParseData(IDataKind* pDataKind, IOutputDataProcessor* pDataProcessor);
     size_t GetMatchesCount() { return m_uMatchesCount; }
 private:

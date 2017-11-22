@@ -85,7 +85,7 @@ void OutputDataProcessorMultipleFiles::AddData( const std::wsmatch& match )
     else
     {
         auto itvvMatchedData = m_vvMatchedData.begin();
-        for (auto& s : vTemp)
+        for (auto&& s : vTemp)
         {
             itvvMatchedData->push_back(std::move(s));
             ++itvvMatchedData;

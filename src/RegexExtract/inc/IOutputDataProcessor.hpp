@@ -8,11 +8,12 @@ class IOutputDataProcessor
 public:
 
     /// Gets processed data in a formatted way. Each child class defines specific methods to return data ready to be written to output file.
+    /// Each string in returned vector is a fully formatted text (e.g. pretty printed) ready to be sent to notepad++ or a file
     virtual std::vector<std::wstring> GetProcessedData() = 0;
 
     virtual void AddData(const std::wsmatch& match) = 0;
     virtual void AddData(std::wstring&& replaced_match) {replaced_match = std::move(replaced_match);}
-    virtual void Reset() = 0;
+    virtual void Reset()   = 0;
     virtual bool IsEmpty() = 0;
     IOutputDataProcessor() :
         m_bLineMaxSize(false), m_bProcessed(false) {;}
@@ -41,10 +42,10 @@ public:
         ///
         /// \return The line maximum size. Equal to sum of the longest matches for each matched group.
         size_t GetLineMaxSize();
-        size_t m_uAllMatchesSize;
-        size_t m_uLineMaxSize;
-        bool m_bLineMaxSize;
-        bool m_bProcessed;
+        size_t m_uAllMatchesSize = 0;
+        size_t m_uLineMaxSize    = 0;
+        bool m_bLineMaxSize      = false;
+        bool m_bProcessed        = false;
         std::vector<size_t> m_vMatchesMaxSize;
 };
 
