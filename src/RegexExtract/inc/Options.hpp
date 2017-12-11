@@ -134,6 +134,8 @@ public:
     static bool initialize(const std::wstring& wsOptionsFilePath, bool bCreateDefaultIfNotExist = true);
     static const std::wstring& options_file_path() { return get().m_wsOptionsFilePath; }
 
+    /// Restore a default configuration in case of loading errors or no actual options present.
+    static void restore_default_settings();
 private:
     /// All functions below made private to prohibit multiple object creation.
     Options() = default;
@@ -179,8 +181,6 @@ private:
     // Path combobox
     std::vector<std::wstring> m_files_paths;  
 
-    /// Creates a default configuration in case of loading errors or no actual options present.
-    static void restore_default_settings();
 };
 
 /// Class used to convert strings from edit boxes, XML files etc. to C++ equivalents.

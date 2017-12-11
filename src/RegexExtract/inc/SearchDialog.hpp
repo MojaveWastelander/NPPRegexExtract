@@ -27,6 +27,9 @@ protected:
     virtual INT_PTR DialogProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
     virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
     virtual void OnOK();
+    virtual void OnCancel();
+    virtual void OnClose();
+
 
 private:
     Win32xx::CFont fnt{CreateFont(16, 0, 0, 0, 0, TRUE, 0, 0, 0, 0, 0, 0, 0, L"Consolas")};
@@ -92,8 +95,12 @@ private:
     void OnExtract();
 	void UpdateTitle(CString& sText);
 
+    /// Returns a data processor depending on dialog settings, doesn't depend on Options class
     std::unique_ptr<IOutputDataProcessor> GetDataProcessor();
+
+    /// Returns a data extractor depending on dialog settings, doesn't depend on Options class
     IDataExtractor* GetDataExtractor();
+
     std::unique_ptr<IDataKind> NextData();
     std::vector<std::unique_ptr<IDataKind>> m_vData;
 };

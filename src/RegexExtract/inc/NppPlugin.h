@@ -92,8 +92,8 @@
 
 namespace npp_plugin 
 {
-
-    void runMainDialog();
+     void show_dialog();
+     void runMainDialog();
 
 }
 

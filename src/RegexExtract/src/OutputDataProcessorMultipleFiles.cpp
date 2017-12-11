@@ -66,7 +66,7 @@ void OutputDataProcessorMultipleFiles::AddData( const std::wsmatch& match )
     {
         vTemp.push_back(std::move(itMatch->str()));
     }
-    CalculateMatchesSize(match);
+    calculate_matches_size(match);
 
     if (Options::extract_case_conversion() != Options::en_ExtractCaseConversion::NoConversion)
     {

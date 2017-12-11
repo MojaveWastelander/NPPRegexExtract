@@ -259,7 +259,18 @@ BOOL SearchDialog::OnInitDialog()
 
 void SearchDialog::OnOK()
 {
-    CDialog::OnOK();
+    //CDialog::OnOK();
+    this->ShowWindow(SW_HIDE);
+}
+
+void SearchDialog::OnCancel()
+{
+    this->ShowWindow(SW_HIDE);
+}
+
+void SearchDialog::OnClose()
+{
+    this->ShowWindow(SW_HIDE);
 }
 
 void SearchDialog::SaveSettings()
@@ -311,13 +322,12 @@ void SearchDialog::SaveSettings()
 
     //TODO: Check if search was done already
     Options::get().save_options();
-    m_upDataProcessor = GetDataProcessor();
-    m_upDataExtractor.reset(GetDataExtractor());
 }
 
 void SearchDialog::OnSearch(bool bShowResults)
 {
-
+    m_upDataProcessor = GetDataProcessor();
+    m_upDataExtractor.reset(GetDataExtractor());
     try
     {
         std::wstring wsExpression = m_cbxFind.GetWindowText();

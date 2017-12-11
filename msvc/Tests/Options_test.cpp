@@ -17,28 +17,28 @@ TEST_CASE("Initialization checks", "[initialization]")
 {
     SECTION("Default values in class")
     {         
-        REQUIRE((bool)(Options::extract_mode() == Options::en_ExtractMode::ExtractInSingleFile));
-        REQUIRE((bool)(Options::extract_mode_single_file() == Options::en_ExtractModeSingleFile::PrettyPrint));
-        REQUIRE((bool)(Options::save_mode() == Options::en_SaveMode::ExtractToNotepad));
-        REQUIRE((bool)(Options::extract_case_conversion() == Options::en_ExtractCaseConversion::NoConversion));
-        REQUIRE((bool)(Options::sort_mode() == Options::en_SortMode::NoSort));
-        REQUIRE((bool)(Options::data_location() == Options::en_DataLocation::CurrentFile));
-        REQUIRE(Options::find_history().empty());
-        REQUIRE(Options::replace_history().empty());
-        REQUIRE(Options::separator().empty());
-        REQUIRE(Options::base_path().empty());
-        REQUIRE(Options::template_name().empty());
-        REQUIRE(Options::files_masks().empty());
-        REQUIRE(Options::files_paths().empty());
-        REQUIRE(!Options::add_header());
-        REQUIRE(!Options::open_files_in_notepad());
-        REQUIRE(!Options::skip_whole_match());
-        REQUIRE(!Options::filter_unique());
-        REQUIRE(!Options::case_insensitive());
-        REQUIRE(!Options::dot_match_newline());
-        REQUIRE(!Options::in_selection());
-
-        REQUIRE(Options::options_file_path().empty());
+        //REQUIRE((bool)(Options::extract_mode() == Options::en_ExtractMode::ExtractInSingleFile));
+        //REQUIRE((bool)(Options::extract_mode_single_file() == Options::en_ExtractModeSingleFile::PrettyPrint));
+        //REQUIRE((bool)(Options::save_mode() == Options::en_SaveMode::ExtractToNotepad));
+        //REQUIRE((bool)(Options::extract_case_conversion() == Options::en_ExtractCaseConversion::NoConversion));
+        //REQUIRE((bool)(Options::sort_mode() == Options::en_SortMode::NoSort));
+        //REQUIRE((bool)(Options::data_location() == Options::en_DataLocation::CurrentFile));
+        //REQUIRE(Options::find_history().empty());
+        //REQUIRE(Options::replace_history().empty());
+        ////REQUIRE(Options::separator().empty());
+        //REQUIRE(Options::base_path().empty());
+        //REQUIRE(Options::template_name().empty());
+        //REQUIRE(Options::files_masks().empty());
+        //REQUIRE(Options::files_paths().empty());
+        //REQUIRE(!Options::add_header());
+        //REQUIRE(!Options::open_files_in_notepad());
+        //REQUIRE(!Options::skip_whole_match());
+        //REQUIRE(!Options::filter_unique());
+        //REQUIRE(!Options::case_insensitive());
+        //REQUIRE(!Options::dot_match_newline());
+        //REQUIRE(!Options::in_selection());
+        //
+        //REQUIRE(Options::options_file_path().empty());
     }
 
     SECTION("No option file initialization")

@@ -11,8 +11,31 @@ public:
     /// Each string in returned vector is a fully formatted text (e.g. pretty printed) ready to be sent to notepad++ or a file
     virtual std::vector<std::wstring> GetProcessedData() = 0;
 
+    /// Match class is used temporarily and data processor should store matched strings
+    /// It is implied that RegexSearch class is used thus there will always same amount of groups processed
+    /// with each call
     virtual void AddData(const std::wsmatch& match) = 0;
-    virtual void AddData(std::wstring&& replaced_match) {replaced_match = std::move(replaced_match);}
+
+    /// When "Extract with replace" is selected class will store only replaced strings
+    /// How these strings are formatted is defined by replace expression passed to 
+    /// RegexSearch class
+    virtual void AddData(std::wstring&& replaced_match) {}
+
+    /// 
+    void header_items(const std::wsmatch& match)
+    {
+        if (m_header_items.empty())
+        {
+            if (!Options::skip_whole_match())
+            {
+                m_header_items.emplace_back(L"Match");
+            }
+            for (size_t idx = 1; idx < match.size(); ++idx)
+            {
+                m_header_items.emplace_back(fmt::format(L"gr_{}", idx - 1));
+            }
+        }
+    }
     virtual void Reset()   = 0;
     virtual bool IsEmpty() = 0;
     IOutputDataProcessor() :
@@ -35,8 +58,8 @@ public:
         /// Calculates matches characteristics. Used for pretty print and output strings preallocation values.
         ///
         /// \param  match   Specifies the match.
-        void CalculateMatchesSize(const std::wsmatch& match);
-        void CalculateMatchesSize(const std::wstring& replaced_match);
+        void calculate_matches_size(const std::wsmatch& match);
+        void calculate_matches_size(const std::wstring& replaced_match);
 
         /// Gets output line maximum size. Made as function to calculate size only one time when needed.
         ///
@@ -47,5 +70,6 @@ public:
         bool m_bLineMaxSize      = false;
         bool m_bProcessed        = false;
         std::vector<size_t> m_vMatchesMaxSize;
+        std::vector<std::wstring> m_header_items;
 };
 

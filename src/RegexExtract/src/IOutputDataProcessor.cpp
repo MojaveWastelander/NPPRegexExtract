@@ -2,7 +2,7 @@
 
 std::wstring IOutputDataProcessor::FormatLine(const std::vector<std::wstring>&vLineData)
 {
-    if (vLineData.size() == 1) return std::move(std::wstring(vLineData[0] + L"\r\n"));
+    if (vLineData.size() == 1) return std::move(std::wstring(vLineData[0]));
 
     std::wstring wsTemp;
     try
@@ -13,9 +13,12 @@ std::wstring IOutputDataProcessor::FormatLine(const std::vector<std::wstring>&vL
             auto itColumnMaxSize = m_vMatchesMaxSize.cbegin();
             for (auto& s : vLineData)
             {
+                auto& curr_column_size = *itColumnMaxSize++;
                 wsTemp += s;
-                wsTemp.insert(wsTemp.end(), (*itColumnMaxSize - s.size() + TAB_SIZE), ' ');
-                ++itColumnMaxSize;
+                if(itColumnMaxSize != m_vMatchesMaxSize.cend())
+                {
+                    wsTemp.insert(wsTemp.end(), (curr_column_size - s.size() + TAB_SIZE), ' ');
+                }
             }
         } 
         else
@@ -30,7 +33,7 @@ std::wstring IOutputDataProcessor::FormatLine(const std::vector<std::wstring>&vL
                 }
             }
         }
-        wsTemp += L"\r\n";
+       // wsTemp += L"\r\n";
     }
     catch (std::exception& e)
     {
@@ -66,7 +69,7 @@ size_t IOutputDataProcessor::GetLineMaxSize()
     return m_uLineMaxSize;
 }
 
-void IOutputDataProcessor::CalculateMatchesSize( const std::wsmatch& match )
+void IOutputDataProcessor::calculate_matches_size( const std::wsmatch& match )
 {
     if (m_vMatchesMaxSize.empty())
     {
@@ -81,12 +84,12 @@ void IOutputDataProcessor::CalculateMatchesSize( const std::wsmatch& match )
             bSkipFirst = false;
             continue;
         }
-        *it = max(*it, static_cast<size_t>(m.second - m.first));
-        ++it;
+        auto& match_max_size = *it++;
+        match_max_size = max(match_max_size, static_cast<size_t>(m.second - m.first));
     }
 }
 
-void IOutputDataProcessor::CalculateMatchesSize( const std::wstring& replaced_match )
+void IOutputDataProcessor::calculate_matches_size( const std::wstring& replaced_match )
 {
     if (m_vMatchesMaxSize.empty())
     {

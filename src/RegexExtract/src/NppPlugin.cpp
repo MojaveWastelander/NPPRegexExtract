@@ -25,6 +25,9 @@
 #include <WinUser.h>
 #include <thread>
 #include <wxx_wincore.h>
+#include <nana/gui.hpp>
+#include <nana/gui/widgets/label.hpp>
+#include <nana/gui/widgets/button.hpp>
 /*
  *  The v_getfuncarray namespace alias allows for emulation of a class's 'virtual' function by
  *  providing a 'symlink' like pointer to whichever npp_plugin namsespace extension that will
@@ -37,11 +40,11 @@
  */
 namespace v_getfuncarray = npp_plugin;
 
-Win32xx::CWinApp g_app;
-SearchDialog g_dlg(IDD_SEARCH_DIALOG);
+static Win32xx::CWinApp g_app;
+static SearchDialog g_dlg(IDD_SEARCH_DIALOG);
 
 static ShortcutKey g_extractShortcut = {true, false, true, 'e'};
-
+volatile int g;
 
 //  <--- Required Plugin Interface Routines --->
 BOOL APIENTRY DllMain(HANDLE hModule, DWORD reasonForCall, LPVOID /*lpReserved*/)
@@ -57,7 +60,7 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD reasonForCall, LPVOID /*lpReserved*/
             npp_plugin::initPlugin(TEXT("RegexExtract"), hModule);
 
             // <--- Base menu function items setup --->
-            setPluginFuncItem(TEXT("Show main window"), npp_plugin::runMainDialog, 0, false, &g_extractShortcut);
+            setPluginFuncItem(TEXT("Show main window"), npp_plugin::show_dialog, 0, false, &g_extractShortcut);
            std::vector<wchar_t> vPath(MAX_PATH + 1);
            int iPathChars = ::GetModuleFileNameW((HMODULE)hModule, &vPath[0], MAX_PATH); 
            std::experimental::filesystem::path p{vPath.begin(), vPath.end()};
@@ -69,6 +72,8 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD reasonForCall, LPVOID /*lpReserved*/
            }
             std::locale::global(std::locale(""));
 
+            
+
 
 #ifdef NPP_PLUGININTERFACE_CMDMAP_EXTENSION_H
             // <--- Initalize internal cmdId to funcItem cmdId map. --->
@@ -77,11 +82,17 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD reasonForCall, LPVOID /*lpReserved*/
         }
         break;
 
-    case DLL_PROCESS_DETACH: break;
+    case DLL_PROCESS_DETACH: 
+        ++g;
+        break;
 
-    case DLL_THREAD_ATTACH: break;
+    case DLL_THREAD_ATTACH: 
+        ++g;
+        break;
 
-    case DLL_THREAD_DETACH: break;
+    case DLL_THREAD_DETACH: 
+        ++g;
+        break;
 
     }
 
@@ -129,6 +140,7 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
      *
      */
     using namespace npp_plugin;
+   // OutputDebugString((std::to_wstring(notifyCode->nmhdr.code) + L"\n").c_str());
 
     switch (notifyCode->nmhdr.code) 
     {
@@ -136,7 +148,14 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
         npp_plugin::setNppReady();
         npp_plugin::hCurrViewNeedsUpdate();
         break;
-
+    case NPPN_SHUTDOWN:
+                       break;
+   // case 0x7ED:
+   //     if (g_dlg.IsWindow())
+   //        g_dlg.ShowWindow(SW_HIDE); break;
+   // case 0x7EC:
+   //     if (g_dlg.IsWindow())
+   //         g_dlg.ShowWindow(SW_SHOW); break;
     default:
         break;
     }
@@ -168,7 +187,7 @@ extern "C" __declspec(dllexport) LRESULT messageProc(UINT Message, WPARAM wParam
      */
 
     using namespace npp_plugin;
-
+    OutputDebugString((std::to_wstring(Message) + L"\n").c_str());
     // ===>  Include optional messaging handlers here.
     switch (Message)
     {
@@ -196,8 +215,26 @@ extern "C" __declspec(dllexport) LRESULT messageProc(UINT Message, WPARAM wParam
     return TRUE;
 }
 
+void npp_plugin::show_dialog()
+{
+    static bool b = false;
+    if (!b)
+    {
+        std::thread t{npp_plugin::runMainDialog};
+        while (!t.joinable())
+        {
+        }
+        t.detach();
+        b = true;
+    }
+    else
+    {
+        g_dlg.ShowWindow(SW_SHOW);
+    }
+}
+
 void npp_plugin::runMainDialog()
 {
-    g_dlg.Create();
+    g_dlg.DoModeless(npp_plugin::hNpp());
     g_app.Run();
 }

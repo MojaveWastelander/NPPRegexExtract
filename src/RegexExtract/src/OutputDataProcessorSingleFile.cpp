@@ -8,16 +8,18 @@ OutputDataProcessorSingleFile::~OutputDataProcessorSingleFile(void)
 
 void OutputDataProcessorSingleFile::AddData( const std::wsmatch& match )
 {
+
     std::vector<std::wstring> vTemp;
+    header_items(match);
     vTemp.reserve((Options::skip_whole_match() == false)?match.size():(match.size() - 1));
     auto itPos = (Options::skip_whole_match() == false)?match.begin():(match.begin() + 1);
 
     std::for_each(itPos, match.end(), 
         [&vTemp](const std::wsmatch::_Elem& m)
     {
-        vTemp.push_back(std::move(m.str()));
+        vTemp.emplace_back(std::move(m.str()));
     });
-    CalculateMatchesSize(match);
+    calculate_matches_size(match);
     ProcessData(std::move(vTemp));
 }
 
@@ -26,7 +28,7 @@ void OutputDataProcessorSingleFile::AddData( std::wstring&& replaced_match )
     std::vector<std::wstring> vTemp;
     vTemp.push_back(replaced_match);
    // logging::log() << "Replaced match: " << vTemp[0];
-    CalculateMatchesSize(replaced_match);
+    calculate_matches_size(replaced_match);
     ProcessData(std::move(vTemp));
 }
 
@@ -78,10 +80,19 @@ std::vector<std::wstring> OutputDataProcessorSingleFile::GetProcessedData()
                 }
             }
         }
-    
+        if (Options::add_header())
+        {
+            wsTemp += FormatLine(m_header_items) + L"\r\n";
+        }
+
+        size_t idx = m_vvMatchedData.size();
         for (auto& v : m_vvMatchedData)
         {
             wsTemp += FormatLine(v);
+            if(--idx)
+            {
+                wsTemp += L"\r\n";
+            }
         }
         vProcessedData.push_back(wsTemp);
     }
