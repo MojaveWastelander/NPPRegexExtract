@@ -88,7 +88,9 @@
 // RegexExtract includes
 #include "RegexSearch.hpp"
 #include "Options.hpp"
-
+#include <nana/gui.hpp>
+#include <nana/gui/widgets/label.hpp>
+#include <nana/gui/widgets/button.hpp>
 
 namespace npp_plugin 
 {

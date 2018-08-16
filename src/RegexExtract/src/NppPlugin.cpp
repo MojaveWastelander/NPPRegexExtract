@@ -25,9 +25,9 @@
 #include <WinUser.h>
 #include <thread>
 #include <wxx_wincore.h>
-#include <nana/gui.hpp>
-#include <nana/gui/widgets/label.hpp>
-#include <nana/gui/widgets/button.hpp>
+#include <functional>
+#include <atomic>
+
 /*
  *  The v_getfuncarray namespace alias allows for emulation of a class's 'virtual' function by
  *  providing a 'symlink' like pointer to whichever npp_plugin namsespace extension that will
@@ -46,6 +46,8 @@ static SearchDialog g_dlg(IDD_SEARCH_DIALOG);
 static ShortcutKey g_extractShortcut = {true, false, true, 'e'};
 volatile int g;
 
+std::function<nana::form&(void)> g_fn;
+std::atomic<bool> g_close_dialog = false;
 //  <--- Required Plugin Interface Routines --->
 BOOL APIENTRY DllMain(HANDLE hModule, DWORD reasonForCall, LPVOID /*lpReserved*/)
 {
@@ -139,8 +141,11 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
      *  by messageProc(SCI_GETLEXER, 0, 0).
      *
      */
+    
     using namespace npp_plugin;
-   // OutputDebugString((std::to_wstring(notifyCode->nmhdr.code) + L"\n").c_str());
+    //OutputDebugString((std::to_wstring(notifyCode->nmhdr.code) + L"\n").c_str());
+    WINDOWPLACEMENT wp{0};
+    wp.length = sizeof(WINDOWPLACEMENT);
 
     switch (notifyCode->nmhdr.code) 
     {
@@ -149,13 +154,27 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
         npp_plugin::hCurrViewNeedsUpdate();
         break;
     case NPPN_SHUTDOWN:
+        if (g_fn)
+        {
+            g_close_dialog = true; // allow window closing
+            g_fn().close();
+        }
                        break;
-   // case 0x7ED:
-   //     if (g_dlg.IsWindow())
-   //        g_dlg.ShowWindow(SW_HIDE); break;
+    case 0x7ED:
+    case 0x7EC:
+           // OutputDebugString(fmt::format(L"IsIconic: {}\n", ::IsWindowVisible(static_cast<HWND>(notifyCode->nmhdr.hwndFrom))).c_str());
+        if (g_fn)
+        {
+            //::GetWindowPlacement(static_cast<HWND>(notifyCode->nmhdr.hwndFrom), &wp);
+        } break;
+   //     if (g_fn)
+   //        g_fn().hide(); break;
    // case 0x7EC:
-   //     if (g_dlg.IsWindow())
-   //         g_dlg.ShowWindow(SW_SHOW); break;
+   //     if (g_fn)
+   //         if (!g_fn().visible())
+   //         {
+   //             g_fn().show(); break;
+   //         }
     default:
         break;
     }
@@ -187,7 +206,6 @@ extern "C" __declspec(dllexport) LRESULT messageProc(UINT Message, WPARAM wParam
      */
 
     using namespace npp_plugin;
-    OutputDebugString((std::to_wstring(Message) + L"\n").c_str());
     // ===>  Include optional messaging handlers here.
     switch (Message)
     {
@@ -197,7 +215,7 @@ extern "C" __declspec(dllexport) LRESULT messageProc(UINT Message, WPARAM wParam
         {
             //  Inter-Plugin messaging
             CommunicationInfo* comm = reinterpret_cast<CommunicationInfo *>(lParam);
-            
+            //OutputDebugString((std::to_wstring(comm->internalMsg) + L"\n").c_str());
             switch ( comm->internalMsg )
             {
                 default:
@@ -229,12 +247,33 @@ void npp_plugin::show_dialog()
     }
     else
     {
-        g_dlg.ShowWindow(SW_SHOW);
+        g_fn().show();
     }
 }
-
+#include <npp/Common.h>
 void npp_plugin::runMainDialog()
 {
-    g_dlg.DoModeless(npp_plugin::hNpp());
-    g_app.Run();
+    static nana::form s_fm{};
+    nana::label lb{s_fm, nana::rectangle{10, 10, 100, 100}};
+    lb.caption("Hello, world!");
+    auto window_handle = reinterpret_cast<HWND>(s_fm.native_handle());
+    auto prev_style = ::GetWindowLong(window_handle, GWL_STYLE);
+    ::SetWindowLong(window_handle, GWL_STYLE, ((prev_style & ~(WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN)) | WS_CHILD));
+    ::SetWindowPos(window_handle, nullptr, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+    ::SetParent(window_handle, npp_plugin::hMainView());
+    ::SetWindowPos(window_handle, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+
+    s_fm.show();
+    s_fm.events().unload([&](const nana::arg_unload& arg){
+        arg.cancel = !g_close_dialog;
+        s_fm.hide();
+    }); 
+
+
+    static auto fm_ret = [&]() -> nana::form&
+    {
+        return s_fm;
+    };
+    g_fn = fm_ret;
+    nana::exec();
 }
