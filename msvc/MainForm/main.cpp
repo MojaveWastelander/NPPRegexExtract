@@ -10,6 +10,7 @@ int CALLBACK WinMain(
 )
 {
     MainForm fm;
+    fm.events_processing();
 
     fm.show();
 
