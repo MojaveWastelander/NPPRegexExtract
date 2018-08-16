@@ -250,12 +250,12 @@ void npp_plugin::show_dialog()
         g_fn().show();
     }
 }
-#include <npp/Common.h>
+
+#include "../inc/MainForm.hpp"
 void npp_plugin::runMainDialog()
 {
-    static nana::form s_fm{};
-    nana::label lb{s_fm, nana::rectangle{10, 10, 100, 100}};
-    lb.caption("Hello, world!");
+    static MainForm s_fm;
+
     auto window_handle = reinterpret_cast<HWND>(s_fm.native_handle());
     auto prev_style = ::GetWindowLong(window_handle, GWL_STYLE);
     ::SetWindowLong(window_handle, GWL_STYLE, ((prev_style & ~(WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN)) | WS_CHILD));

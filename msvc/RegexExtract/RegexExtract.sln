@@ -12,10 +12,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "..\Tests\Tests.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Notepad++", "..\..\..\notepad-plus-plus\PowerEditor\visual.net\notepadPlus.vs2017.vcxproj", "{FCF60E65-1B78-4D1D-AB59-4FC00AC8C248}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MainForm", "..\MainForm\MainForm.vcxproj", "{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -47,12 +46,23 @@ Global
 		{FCF60E65-1B78-4D1D-AB59-4FC00AC8C248}.Release|x64.Build.0 = Release|x64
 		{FCF60E65-1B78-4D1D-AB59-4FC00AC8C248}.Release|x86.ActiveCfg = Release|Win32
 		{FCF60E65-1B78-4D1D-AB59-4FC00AC8C248}.Release|x86.Build.0 = Release|Win32
+		{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}.Debug|x64.ActiveCfg = Debug|x64
+		{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}.Debug|x64.Build.0 = Debug|x64
+		{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}.Debug|x86.ActiveCfg = Debug|Win32
+		{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}.Debug|x86.Build.0 = Debug|Win32
+		{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}.Release|x64.ActiveCfg = Release|x64
+		{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}.Release|x64.Build.0 = Release|x64
+		{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}.Release|x86.ActiveCfg = Release|Win32
+		{1EE1D47B-124E-41C5-B1F6-77C9C240AD06}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8C41E5F-66A7-4572-B26E-EA0D146A1099}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true

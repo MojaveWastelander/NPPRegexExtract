@@ -81,6 +81,9 @@
     <ClInclude Include="..\..\src\RegexExtract\resources\resource.h">
       <Filter>resources</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\RegexExtract\inc\MainForm.hpp">
+      <Filter>inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\RegexExtract\resources\Busy Extract.ani">
@@ -172,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="..\..\external\npp\SciMessager.cpp">
       <Filter>npp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RegexExtract\src\MainForm.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

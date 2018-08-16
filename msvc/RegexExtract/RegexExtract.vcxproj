@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\..\external;$(CPP_LIBS)\Win32++\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\inc;$(ProjectDir)..\..\external;$(CPP_LIBS)\Win32++\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\bin\plugins\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,6 +144,7 @@
     <ClInclude Include="..\..\src\RegexExtract\inc\IDataExtractor.hpp" />
     <ClInclude Include="..\..\src\RegexExtract\inc\IDataKind.hpp" />
     <ClInclude Include="..\..\src\RegexExtract\inc\IOutputDataProcessor.hpp" />
+    <ClInclude Include="..\..\src\RegexExtract\inc\MainForm.hpp" />
     <ClInclude Include="..\..\src\RegexExtract\inc\NppPlugin.h" />
     <ClInclude Include="..\..\src\RegexExtract\inc\Options.hpp" />
     <ClInclude Include="..\..\src\RegexExtract\inc\OutputDataProcessorMultipleFiles.hpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="..\..\src\RegexExtract\src\Encoding.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\src\FolderBrowserDialog.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\src\IOutputDataProcessor.cpp" />
+    <ClCompile Include="..\..\src\RegexExtract\src\MainForm.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\src\NppPlugin.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\src\Options.cpp" />
     <ClCompile Include="..\..\src\RegexExtract\src\OutputDataProcessorMultipleFiles.cpp" />
