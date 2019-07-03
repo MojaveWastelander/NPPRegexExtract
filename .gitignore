@@ -221,3 +221,4 @@ test/npp/*
 /msvc/RegexExtract/Unicode Debug/*
 /msvc/RegexExtract/Unicode Realeas/*
 /msvc/bin*/*
+/external/Win32xx/*
