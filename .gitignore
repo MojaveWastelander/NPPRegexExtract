@@ -220,3 +220,4 @@ test/npp/*
 *.idb
 /msvc/RegexExtract/Unicode Debug/*
 /msvc/RegexExtract/Unicode Realeas/*
+/msvc/bin*/*

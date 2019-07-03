@@ -1,0 +1,4 @@
+[submodule "external/notepad-plus-plus"]
+	path = external/notepad-plus-plus
+	url = https://github.com/notepad-plus-plus/notepad-plus-plus.git
+	branch = 3f7956dc1bd16445f031a38bca8aa9e72806a408
