@@ -39,6 +39,8 @@ E.g. for x64 static build an install will look like this
 $ vcpkg install boost-regex --triplet x64-windows-static
 ```
 
+Download [Win32++](https://sourceforge.net/projects/win32-framework) and extract archive contents to `external/Win32xx` directory
+
 Open the solution from `msvc/RegexExtract/RegexExtract.sln` and build `RegexExtract`
 
 When building `RegexExtract` it will first build Notepad++ project, then scintilla dlls (if they are missin in bin folder) then the plugin itself.
