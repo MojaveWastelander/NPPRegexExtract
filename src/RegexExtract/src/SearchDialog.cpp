@@ -571,7 +571,7 @@ void SearchDialog::OnExtract()
         return;
     }
     ::SetCursor(m_curArrow);
-    this->EndDialog(0);
+    this->ShowWindow(SW_HIDE);
 }
 
 void SearchDialog::UpdateTitle(CString& sText)
