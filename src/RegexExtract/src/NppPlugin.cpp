@@ -25,9 +25,6 @@
 #include <WinUser.h>
 #include <thread>
 #include <wxx_wincore.h>
-#include <nana/gui.hpp>
-#include <nana/gui/widgets/label.hpp>
-#include <nana/gui/widgets/button.hpp>
 /*
  *  The v_getfuncarray namespace alias allows for emulation of a class's 'virtual' function by
  *  providing a 'symlink' like pointer to whichever npp_plugin namsespace extension that will
