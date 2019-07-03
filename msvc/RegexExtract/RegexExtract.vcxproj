@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\..\external;$(CPP_LIBS)\Win32++\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\external;$(ProjectDir)..\..\external\Win32xx\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\bin64\plugins\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)..\..\external;$(CPP_LIBS)\Win32++\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\external;$(ProjectDir)..\..\external\Win32xx\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\bin64\plugins\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

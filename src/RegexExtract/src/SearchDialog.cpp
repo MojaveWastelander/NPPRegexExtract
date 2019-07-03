@@ -63,7 +63,7 @@ BOOL SearchDialog::OnCommand(WPARAM wParam, LPARAM lParam)
         auto folderBrowserDialog1 = std::make_unique<FolderBrowserDialog>();
         folderBrowserDialog1->Flags |= BIF_RETURNONLYFSDIRS | BIF_EDITBOX | BIF_VALIDATE | BIF_NEWDIALOGSTYLE | BIF_UAHINT;
         folderBrowserDialog1->Title = L"Choose a folder or try to create new one";
-        folderBrowserDialog1->Owner = m_hWnd;
+        folderBrowserDialog1->Owner = this->GetHwnd();
 
         if (folderBrowserDialog1->ShowDialog())
         {
@@ -364,7 +364,7 @@ void SearchDialog::OnSearch(bool bShowResults)
     }
     catch (std::exception& e)
     {
-       ::MessageBox(this->m_hWnd, utf8util::UTF16FromUTF8(e.what()).c_str(), L"RegexExtract", MB_ICONERROR);
+       ::MessageBox(this->GetHwnd(), utf8util::UTF16FromUTF8(e.what()).c_str(), L"RegexExtract", MB_ICONERROR);
     }
     catch (...)
     {
@@ -460,12 +460,12 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
             // If path does not exist or is not a directory search will not be executed
             if (!std::experimental::filesystem::exists(pathToSearch))
             {
-                ::MessageBox(this->m_hWnd, L"Path does not exist", L"Data location path field", MB_ICONEXCLAMATION);
+                ::MessageBox(this->GetHwnd(), L"Path does not exist", L"Data location path field", MB_ICONEXCLAMATION);
                 break;
             }
             else if (!std::experimental::filesystem::is_directory(pathToSearch))
             {
-                ::MessageBox(this->m_hWnd, L"Field provided is not a directory", L"Data location path field", MB_ICONEXCLAMATION);
+                ::MessageBox(this->GetHwnd(), L"Field provided is not a directory", L"Data location path field", MB_ICONEXCLAMATION);
                 break;
             }
 
@@ -483,7 +483,7 @@ std::unique_ptr<IDataKind> SearchDialog::NextData()
             }
             catch (std::exception& e)
             {
-                ::MessageBox(this->m_hWnd, utf8util::UTF16FromUTF8(e.what()).c_str(), L"Data location mask regex error", MB_ICONERROR);
+                ::MessageBox(this->GetHwnd(), utf8util::UTF16FromUTF8(e.what()).c_str(), L"Data location mask regex error", MB_ICONERROR);
                 break;
             }
         }
