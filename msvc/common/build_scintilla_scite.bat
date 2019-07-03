@@ -12,8 +12,16 @@ echo bin path %bin%
 cd %sc_path%\win32
 nmake -f scintilla.mak clean
 nmake -f scintilla.mak
-copy %npp_base_path%\bin\Scintilla.dll %bin%\Scintilla.dll
-copy %npp_base_path%\bin\SciLexer.dll %bin%\SciLexer.dll
+
+if exist %npp_base_path%\bin\Scintilla.dll (
+    copy %npp_base_path%\bin\Scintilla.dll %bin%\Scintilla.dll
+    copy %npp_base_path%\bin\SciLexer.dll %bin%\SciLexer.dll
+)
+
+if exist %sc_path%\bin\Scintilla.dll (
+    copy %sc_path%\bin\Scintilla.dll %bin%\Scintilla.dll
+    copy %sc_path%\bin\SciLexer.dll %bin%\SciLexer.dll
+)
 copy %npp_base_path%\src\langs.model.xml %bin%\langs.model.xml
 copy %npp_base_path%\src\stylers.model.xml %bin%\stylers.model.xml
 copy %npp_base_path%\src\shortcuts.xml %bin%\shortcuts.xml
