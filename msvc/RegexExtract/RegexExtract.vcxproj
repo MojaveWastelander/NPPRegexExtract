@@ -72,11 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir)..\..\external;$(ProjectDir)..\..\external\Win32xx\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\bin64\plugins\</OutDir>
+    <OutDir>$(SolutionDir)..\bin64\plugins\RegexExtract\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)..\..\external;$(ProjectDir)..\..\external\Win32xx\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\bin64\plugins\</OutDir>
+    <OutDir>$(SolutionDir)..\bin64\plugins\RegexExtract\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
