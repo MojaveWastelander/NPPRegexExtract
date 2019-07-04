@@ -233,5 +233,11 @@ void npp_plugin::show_dialog()
 void npp_plugin::runMainDialog()
 {
     g_dlg.DoModeless(npp_plugin::hNpp());
+    auto window_handle = g_dlg.GetHwnd();
+    auto prev_style = ::GetWindowLong(window_handle, GWL_STYLE);
+    ::SetWindowLong(window_handle, GWL_STYLE, ((prev_style & ~(WS_CLIPSIBLINGS | WS_CLIPCHILDREN)) | WS_CHILD));
+    ::SetWindowPos(window_handle, nullptr, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+    ::SetParent(window_handle, npp_plugin::hMainView());
+    ::SetWindowPos(window_handle, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
     g_app.Run();
 }
