@@ -46,12 +46,19 @@ Open the solution from `msvc/RegexExtract/RegexExtract.sln` and build `RegexExtr
 When building `RegexExtract` it will first build Notepad++ project, then scintilla dlls (if they are missin in bin folder) then the plugin itself.
 
 **Used 3rd party libraries**
+
 [Alphanum Algorithm](http://www.davekoelle.com/alphanum.html)
+
 [hpslib](https://www.codeproject.com/articles/22046/high-performance-unicode-text-file-i-o-routines-fo)
+
 [utf8conv](https://github.com/GiovanniDicanio/UnicodeConversions)
+
 [win32++](https://sourceforge.net/projects/win32-framework)
+
 [boost](https://www.boost.org)
+
 [fmtlib](https://github.com/fmtlib/fmt)
+
 [catch2](https://github.com/catchorg/Catch2)
 
 
